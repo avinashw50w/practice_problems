@@ -1,0 +1,1411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="description" content=" 
+**C++ Templates** Templates are a feature of the C++ programming language that allows functions and classes to operate with generic types. This allows a function or class to work on ...
+ HackerEarth is a network of top developers across the world. Developers participate in online coding challenges and hackathons, solve problems and discover the best jobs." >
+        <meta name="keywords" content="
+notes, posts, blogs, programming problems, coding problems, programming challenges, coding challenges, dynamic programming, graph theory, number theory, sorting, algorithms, data structure, combinatorics, maths, probability, N-P hard problems, golf problems, approximate problems, challenge problems, easy level, medium level, hard level, ACM ICPC, online judge, algorithmic problems, interview problems, online programming, competitive programming
+" >
+        <meta name="msvalidate.01" content="1BF418E510B5A17A2D71685C571BF4EB" />
+        
+<meta name="google-site-verification" content="ozqyeStBcz4eehbY9Ohb_IUQcA4y8BKzzDCT-H1QPPc" />
+
+
+        <title>   Standard Template Library  | HackerEarth  </title>
+
+        
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<!-- Facebook tags -->
+<meta property="fb:app_id" content="190817380995032" />
+<meta property="og:title" content="Standard Template Library - Akash Sharma" />
+<meta property="og:image" content="https://d320jcjashajb2.cloudfront.net/media/avatars/r3gz3n/resized/200/fbff6fcff7-advent-children-02b.jpg" />
+<meta property="og:description" content="**C++ Templates** Templates are a feature of the C++ programming language that allows functions and classes to operate with generic types. This allows a function or class to work on many different data types without being rewritten for each one. ..."/>
+<meta property="og:url" content="https://notes/standard-template-library/" />
+<meta property="og:site_name" content="HackerEarth"/>
+<meta property="og:type" content="website"/>
+<!-- end Facbook tags -->
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@HackerEarth"/>
+<meta name="twitter:url" content="https://notes/standard-template-library/"/>
+<meta name="twitter:title" content="Standard Template Library"/>
+<!-- end Twitter tags -->
+
+
+        <link rel="shortcut icon" href="https://d320jcjashajb2.cloudfront.net/static/hackathon/images/favicon.png" type="image/x-icon">
+        <link rel="stylesheet" href="https://d320jcjashajb2.cloudfront.net/static/base/base_common_combined.css?v=3.6">
+        <link rel="stylesheet" href="https://d320jcjashajb2.cloudfront.net/static/js/tooltip/tipTip.css">
+        <link rel="stylesheet" href="https://d320jcjashajb2.cloudfront.net/static/offline/offline-theme-slide.css"/>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+        
+
+        
+<link rel="stylesheet" type="text/css" href="https://d320jcjashajb2.cloudfront.net/static/polls/polls.css" />
+<link rel="stylesheet" type="text/css" href="https://d320jcjashajb2.cloudfront.net/static/markdown/pagedown.css" />
+<link rel="stylesheet" type="text/css" href="https://d320jcjashajb2.cloudfront.net/static/notes/notes.css?v=0.8" />
+<link rel="stylesheet" type="text/css" href="https://d320jcjashajb2.cloudfront.net/static/static/css/nice_threadedcomments.css?v=0.7">
+<link href="https://d320jcjashajb2.cloudfront.net/static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+
+
+        <!-- For chartbeat -->
+        <script type="text/javascript">var _sf_startpt=(new Date()).getTime();</script>
+
+        <!-- Make the static variable available for all js files -->
+        <script>
+            var STATIC_URL = "https://d320jcjashajb2.cloudfront.net/static/";
+        </script>
+
+        <!-- Store CSRF_COOKIE -->
+        <script>
+            var CSRF_COOKIE_USED = "True";
+            var CSRF_COOKIE = "ffcD4KGPQ63Aj442mcD41bjbZZSyuUQD";
+        </script>
+
+        <script>
+            var mxp_data = {};
+            
+                
+                mxp_data['visitor'] = 'Ranjan kumar';
+                mxp_data['visitor_url'] = 'https://www.hackerearth.com/users/ranjan9/';
+                
+                
+            
+        </script>
+
+        
+        
+
+    </head>
+
+    <body>
+
+        <!-- Placeholder for any error message on the site -->
+        <div id="alert-message-holder">
+            
+
+            <!-- put a dummy message box so that it can be used when cloning
+                 and adding more -->
+            <div class="alert-message hidden">
+                <div class="message float-left"></div>
+                <div class="cross-holder float-left"><span class="small-cross sprites"></span></div>
+                <div class="clear"></div>
+            </div>
+        </div> <!-- end alert-message-holder -->
+
+        
+    <div id="top-prompt-container" class="hidden prompt-container"></div>
+    
+    
+        
+        <div class="header top-line">
+            <i class="fa fa-bars mobile-menu-btn"></i>
+            <div class="navigation">
+                
+                <a href="/" class="logo no-underline float-left track-header-logo"></a>
+                
+
+                
+                
+                <div id="searchbar">
+                    <div id="search-icon-container" class="float-left">
+                        <div id="search-icon" class="sprites search-icon"></div>
+                    </div>
+                        <input id="searchbar-input" class="float-left" type="text" value="" name="q" autocomplete="off" spellcheck="false" placeholder="Search developers, problems, challenges & companies" ajax1="/search/AJAX/search/" ajax2="/search/search-results/" ></input>
+                    <div id="search-dropdown"></div>
+                </div>
+                
+                
+
+                
+                <ul class="nav-bar no-padding float-right">
+                    
+
+                    
+                    <a class="track-header-practice" href="/problems/"><li id="practice" class="nav-bar-menu "><span class="name">Practice</span></li></a>
+                    <a class="track-header-challenges" href="/challenges/"><li id="challenges" class="nav-bar-menu "><span class="name">Challenges</span></li></a>
+                    
+
+                    
+                    <a class="track-header-companies" href="/companies/"><li id="companies" class="nav-bar-menu "><span class="name">Companies</span></li></a>
+                    
+
+                    
+
+                    
+                    <span id="header-notif-icon">
+                        <a class="track-header-notifs tool-tip notification-icon" title="Notifications" href="#">
+                            <li id="notif-icon" expand="notifications-box" class="nav-bar-menu nav-menu pagelet-hover  tablet-hide" ajax="/notifications/pagelets/new-notifications/" target="notifications-container">
+                                <i class="fa fa-bell"></i>
+                                
+                            </li>
+                            <li id="notif-icon-mob" class="nav-bar-menu tablet-show"><span class="name">Notifications</span></li>
+                        </a>
+                    </span>
+                    
+
+                    
+                    <a class="track-header-profile-box" href="/users/ranjan9/">
+                        <li id="user-name" class="nav-bar-menu tablet-hide"><img src="https://d320jcjashajb2.cloudfront.net/static/base/images/gravatar.png" alt="ranjan9" width="30" height="30" /></li>
+                        <li id="user-name-mob" class="nav-bar-menu tablet-show">Ranjan kumar</li>
+                    </a>
+                    
+
+                    
+                    <a href="#"><li id="hacker-dd-icon" expand="hacker-box" class="nav-bar-menu nav-menu"><div class="caret-icon"><i class="fa fa-caret-down"></i></div></li></a>
+                    
+
+                    
+                </ul> <!-- nav-bar -->
+
+                <div class="clear"></div>
+                
+            </div> <!-- navigation -->
+        </div> <!-- header -->
+        
+    
+    
+
+    
+    
+    
+
+    
+
+    
+    
+
+    
+    <!-- live events widget -->
+    <div id="live-events-trigger-data"></div>
+    
+
+    <!-- This is the center page which has a fixed width of 1100px -->
+    
+<div class="responsive-page denim-gray-texture">
+    <div class="responsive-container">
+        <div class="page-data">
+            <div class="left medium-margin">
+                <div class="notes-header content weight-600 large" id="notes-left-container">
+                    <a href="/notes/"><i class="fa fa-long-arrow-left"></i> Notes</a>
+                    
+            </div> <!--heading-2 -->
+            <div class="clear"></div>
+
+            
+
+
+
+
+
+<div class="note-container">
+    <div class="note-title-container content">
+        
+        
+        <div class="notes-vote regular align-center light">
+            <span class="polls">
+                <a href="#" class="polls-up inline-block light polls-unset-vote" link="/polls/AJAX/note/555/upvote/"><i class="fa fa-caret-up fa-lg fa-3x"></i></a>
+                <br />
+                <span class="polls-count only-positive inline-block dark">14 </span>
+            </span>
+        </div> <!-- end of notes-vote -->
+        
+        
+
+        
+
+        <div class="notes-item standard-margin-left">
+            <div class="notes-title">
+             Standard Template Library
+            </div>
+            <div class="notes-description">
+                    
+                    <div class="less-margin tags-list">
+                    
+                        
+                        
+                        <div class="note-tags dark smaller float-left medium-margin-right"> Stl</div>
+                        
+                        
+                        
+                        <div class="note-tags dark smaller float-left medium-margin-right"> CodeMonk</div>
+                        
+                        
+                    
+                        </div> <!-- tags-list -->
+                    
+                    
+                    <div class="clear"></div>
+
+            </div> <!-- notes-description -->
+        </div><!-- notes-tem -->
+    </div> <!-- note-title-container -->
+
+    <hr class="hr-dashed"/>
+
+    <div class="regular darker note-body content">
+        <p><strong>C++ Templates</strong><br />
+Templates are a feature of the C++ programming language that allows functions and classes to operate with generic types. This allows a function or class to work on many different data types without being rewritten for each one.</p>
+<p>What are <strong>generic functions or classes?</strong>  <br />
+Many times while programming, there is a need for creating functions which perform the same operations but work with different data types. So C++ provides a feature to create a single generic function instead of many functions which can work with different data type by using the <strong>template parameter</strong>. </p>
+<p>What is the <strong>template parameter?</strong>  </p>
+<p>The way we use normal parameters to pass as a value to function, in the same manner template parameters can be used to pass type as argument to function. Basically, it tells what type of data is being passed to the function.</p>
+<p>The syntax for creating a generic function:   </p>
+<pre><code>template &lt;class  type&gt; return-type function-name (parameter-list)
+</code></pre>
+<p>Here, ‘type’ is just a placeholder used to store the data type when this function is used you can use any other name instead class is used to specify the generic type of template, alternatively typename can be used instead of it.</p>
+<p>Let’s try to understand it with an example: </p>
+<p>Assume we have to swap two variables of int type and two of float type. Then, we will have to make two functions where one can swap int type variables and the other one can swap float type variables. But here if we use a generic function, then we can simply make one function and can swap both type of variables by passing their different type in the arguments. Let’s implement this: </p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std ;
+// creating a generic function ‘swap (parameter-list)’ using template :
+template &lt;class X&gt; 
+void swap( X &amp;a, X &amp;b) {
+    X tp;
+    tp = a;
+    a = b;
+    b = tp;
+    cout &lt;&lt; " Swapped elements values of a and b are  " &lt;&lt; a &lt;&lt; " and  " &lt;&lt; b &lt;&lt; " respectively " &lt;&lt; endl;
+}
+
+int main( ) {
+    int a = 10, b = 20 ;
+    float c = 10.5, d = 20.5 ;
+            swap(a , b);          // function swapping ‘int’ elements 
+    swap(c , d);         // function swapping ‘float’ elements 
+    return 0;
+}
+</code></pre>
+<p><strong>Output :</strong>  </p>
+<pre><code>Swapped elements values of a and b are  20 and 10 respectively.
+Swapped elements values of a and b are  20.5 and 10.5 respectively.
+</code></pre>
+<p>After creating the generic function, compiler will automatically generate correct code for the type of data used while executing the function.</p>
+<p>C++ STL also has some containers (pre-build data structures) like vectors, iterators, pairs etc. These are all generic class which can be used to represent collection of any data type.</p>
+<p><strong>Iterator</strong><br />
+An iterator is any object that, points to some element in a range of elements (such as an array or a container) and has the ability to iterate through those elements using a set of operators (with at least the increment (++) and dereference (*) operators).</p>
+<p>A pointer is a form of an iterator. A pointer can point to elements in an array, and can iterate over them using the increment operator (++). There can be other types of iterators as well. 
+For each container class, we can define iterator which can be used to iterate through all the elements of that container.<br />
+Example:<br />
+For Vector:</p>
+<pre><code>vector &lt;int&gt;::iterator  it;
+</code></pre>
+<p>For List:</p>
+<pre><code>list &lt;int&gt;::iterator it;
+</code></pre>
+<p>You will see the implementations using iterators in the topics explained below.</p>
+<p><strong>Vector</strong><br />
+Vectors are sequence containers that have dynamic size. In other words, vectors are dynamic arrays. Just like arrays, vector elements are placed in contiguous storage location so they can be accessed and traversed using iterators. To traverse the vector we need the position of the first and last element in the vector which we can get through <strong>begin()</strong> and <strong>end()</strong> or we can use indexing from 0 to <strong>size()</strong>. Let us see how to construct a vector.</p>
+<pre><code>vector&lt;int&gt; a;                                                   // empty vector of ints
+vector&lt;int&gt; b (5, 10);                                        // five ints with value 10
+vector&lt;int&gt; c (b.begin(),b.end());                     // iterating through second
+vector&lt;int&gt; d (c);                                              // copy of c
+</code></pre>
+<p>Some of the member functions of vectors are:<br />
+<strong>at():</strong> Returns the reference to the element at a particular position (can also be done using ‘[ ]’ operator). Its time complexity is O(1).<br />
+<strong>back():</strong> Returns the reference to the last element. Its time complexity is O(1).<br />
+<strong>begin():</strong> Returns an iterator pointing to the first element of the vector. Its time complexity is O(1).<br />
+<strong>clear():</strong> Deletes all the elements from the vector and assign an empty vector. Its time complexity is O(N) where N is the size of the vector.<br />
+<strong>empty():</strong> Returns a boolean value, true if the vector is empty and false if the vector is not empty. Its time complexity is O(1).<br />
+<strong>end():</strong> Returns an iterator pointing to the last element of the vector. Its time complexity is O(1).<br />
+<strong>erase():</strong> Deletes a single element or a range of elements. Its time complexity is O(N + M) where N is the number of the elements erased and M is the number of the elements moved.<br />
+<strong>front():</strong> Returns the reference to the first element. Its time complexity is O(1).<br />
+<strong>insert():</strong> Inserts new elements into the vector at a particular position. ts time complexity is O(N + M) where N is the number of elements inserted and M is the number of the elements moved .<br />
+<strong>pop_back():</strong> Removes the last element from the vector. Its time complexity is O(1).<br />
+<strong>push_back():</strong> Inserts a new element at the end of the vector. Its time complexity is O(1).<br />
+<strong>resize():</strong> Resizes the vector to the new length which can be less than or greater than the current length. Its time complexity is O(N) where N is the size of the resized vector.<br />
+<strong>size():</strong> Returns the number of elements in the vector. Its time complexity is O(1).  </p>
+<p><strong>Traverse:</strong></p>
+<pre><code>void traverse(vector&lt;int&gt; v)
+{
+    vector &lt;int&gt;::iterator it;
+    for(it = v.begin();it != v.end();++it)
+        cout &lt;&lt; *it &lt;&lt;  ‘ ‘;
+    cout &lt;&lt; endl;
+    for(int i = 0;i &lt; v.size();++i)
+        cout &lt;&lt; v[i] &lt;&lt; ‘ ‘;
+    cout &lt;&lt; endl;
+ }
+</code></pre>
+<p><strong>Implementation:</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int main()
+{
+    vector &lt;int&gt; v;
+    vector &lt;int&gt;::iterator it;
+    v.push_back(5);
+    while(v.back() &gt; 0)
+        v.push_back(v.back() - 1);
+    for(it = v.begin(); it != v.end();++it)
+        cout &lt;&lt; *it &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+    for(int i = 0;i &lt; v.size();++i)
+        cout &lt;&lt; v.at(i) &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+    while(!v.empty())
+    {
+        cout &lt;&lt; v.back() &lt;&lt; ' ';
+        v.pop_back();
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>5 4 3 2 1 0
+5 4 3 2 1 0
+0 1 2 3 4 5
+</code></pre>
+<p><strong>Pair</strong><br />
+Pair is a container that can be used to bind together a two values which may be of different types. Pair provides a way to store two heterogeneous objects as a single unit. </p>
+<pre><code>pair &lt;int, char&gt; p1;                         // default
+pair &lt;int, char&gt; p2 (1, ‘a’);              // value inititialization
+pair &lt;int, char&gt; p3 (p2);                 // copy of p2
+</code></pre>
+<p>We can also initialize a pair using <strong>make_pair()</strong> function. <strong>make_pair(x, y)</strong> will return a pair with first element set to x and second element set to y.</p>
+<pre><code>p1 = make_pair(2, ‘b’);
+</code></pre>
+<p>To access the elements we use keywords, first and second to access the first and second element respectively.</p>
+<pre><code>cout &lt;&lt; p2.first &lt;&lt; ‘ ‘ &lt;&lt; p2.second &lt;&lt; endl;
+</code></pre>
+<p><strong>Implementation:</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;utility&gt;
+
+using namespace std;
+
+int main()
+{
+    pair &lt;int, char&gt; p;
+    pair &lt;int, char&gt; p1(2, 'b');
+    p = make_pair(1, 'a');
+    cout &lt;&lt; p.first &lt;&lt; ' ' &lt;&lt;  p.second &lt;&lt; endl;
+    cout &lt;&lt; p1.first &lt;&lt; ' ' &lt;&lt; p1.second &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>1 a
+2 b
+</code></pre>
+<p><strong>String</strong><br />
+C++ provides a powerful alternative for the <strong>char</strong>*. It is not a built-in data type, but is a container class in the Standard Template Library. String class provides different string manipulation functions like concatenation, find, replace etc. Let us see how to construct a string type.</p>
+<pre><code>string s0;                                                         // s0 = “”
+string s1(“Hello”);                                         // s1 = “Hello”
+string s2 (s1);                                                 // s2 = “Hello”
+string s3 (s1, 1, 2);                                        // s3 = “el”
+string s4 ("Hello World", 5);                      // s4 = “Hello”
+string s5 (5, ‘*’);                                             // s5 = “*****”
+string s6 (s1.begin(), s0.begin()+3);        // s6 = “Hel”
+</code></pre>
+<p>Here are some member functions:<br />
+<strong>append()</strong>: Inserts additional characters at the end of the string (can also be done using ‘<strong>+</strong>’ or ‘<strong>+=</strong>’ operator). Its time complexity is O(N) where N is the size of the new string.<br />
+<strong>assign():</strong> Assigns new string by replacing the previous value (can also be done using ‘<strong>=</strong>’ operator).<br />
+<strong>at():</strong> Returns the character at a particular position (can also be done using ‘<strong>[ ]</strong>’ operator). Its time complexity is O(1).<br />
+<strong>begin():</strong> Returns an iterator pointing to the first character. Its time complexity is O(1).<br />
+<strong>clear():</strong> Erases all the contents of the string and assign an empty string (“”) of length zero. Its time complexity is O(N) where N is the size of the string.<br />
+<strong>compare():</strong> Compares the value of the string with the string passed in the parameter and returns an integer accordingly. Its time complexity is O(N + M) where N is the size of the first string and M is the size of the second string.<br />
+<strong>copy():</strong> Copies the substring of the string in the string passed as parameter and returns the number of characters copied. Its time complexity is O(N) where N is the size of the copied string.<br />
+<strong>c_str():</strong> Convert the string into C-style string (null terminated string) and returns the pointer to the C-style string. Its time complexity is O(1).<br />
+<strong>empty():</strong> Returns a boolean value, true if the string is empty and false if the string is not empty. Its time complexity is O(1).<br />
+<strong>end():</strong> Returns an iterator pointing to a position which is next to the last character. Its time complexity is O(1).<br />
+<strong>erase():</strong> Deletes a substring of the string. Its time complexity is O(N) where N is the size of the new string.<br />
+<strong>find():</strong> Searches the string and returns the first occurrence of the parameter in the string. Its time complexity is O(N) where N is the size of the string.<br />
+<strong>insert():</strong> Inserts additional characters into the string at a particular position. Its time complexity is O(N) where N is the size of the new string.<br />
+<strong>length():</strong> Returns the length of the string. Its time complexity is O(N) where N is the size of the string.<br />
+<strong>replace():</strong> Replaces the particular portion of the string. Its time complexity is O(N) where N is size of the new string.<br />
+<strong>resize():</strong> Resize the string to the new length which can be less than or greater than the current length. Its time complexity is O(N) where N is the size of the new string.<br />
+<strong>size():</strong> Returns the length of the string. Its time complexity is O(1).<br />
+<strong>substr():</strong> Returns a string which is the copy of the substring. Its time complexity is O(N) where N is the size of the substring.  </p>
+<p><strong>Implementation:</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+int main()
+{
+    string s, s1;
+    s = "HELLO";
+    s1 = "HELLO";
+    if(s.compare(s1) == 0)
+        cout &lt;&lt; s &lt;&lt; " is equal to " &lt;&lt; s1 &lt;&lt; endl;
+    else
+        cout &lt;&lt; s &lt;&lt; " is not equal to " &lt;&lt; s1 &lt;&lt; endl;
+    s.append(" WORLD!");
+    cout &lt;&lt; s &lt;&lt; endl;
+    printf("%s\n", s.c_str());
+    if(s.compare(s1) == 0)
+        cout &lt;&lt; s &lt;&lt; " is equal to " &lt;&lt; s1 &lt;&lt; endl;
+    else
+        cout &lt;&lt; s &lt;&lt; " is not equal to " &lt;&lt; s1 &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>HELLO is equal to HELLO
+HELLO WORLD!
+HELLO WORLD!
+HELLO WORLD! is not equal to HELLO
+</code></pre>
+<p><strong>Sets</strong><br />
+Sets are containers which store only unique values and permit easy look ups. The values in the sets are stored in some specific order (like ascending or descending). Elements can only be inserted or deleted, but cannot be modified.  We can access and traverse set elements using iterators just like vectors.</p>
+<pre><code>set&lt;int&gt; s1;                        // Empty Set
+int a[]= {1, 2, 3, 4, 5, 5};
+set&lt;int&gt; s2 (a, a + 6);                            // s2 = {1, 2, 3, 4, 5}
+set&lt;int&gt; s3 (s2);                    // Copy of s2
+set&lt;int&gt; s4 (s3.begin(), s3.end());            // Set created using iterators
+</code></pre>
+<p>Some of the member functions of set are:<br />
+<strong>begin():</strong> Returns an iterator to the first element of the set. Its time complexity is O(1).<br />
+<strong>clear():</strong> Deletes all the elements in the set and the set will be empty. Its time complexity is O(N) where N is the size of the set.<br />
+<strong>count():</strong> Returns 1 or 0 if the element is in the set or not respectively. Its time complexity is O(logN) where N is the size of the set.<br />
+<strong>empty():</strong> Returns true if the set is empty and false if the set has at least one element. Its time complexity is O(1).<br />
+<strong>end():</strong> Returns an iterator pointing to a position which is next to the last element. Its time complexity is O(1).<br />
+<strong>erase():</strong> Deletes a particular element or a range of elements from the set. Its time complexity is O(N) where N is the number of element deleted.<br />
+<strong>find():</strong> Searches for a particular element and returns the iterator pointing to the element if the element is found otherwise it will return the iterator returned by end(). Its time complexity is O(logN) where N is the size of the set.<br />
+<strong>insert():</strong> insert a new element. Its time complexity is O(logN) where N is the size of the set.<br />
+<strong>size():</strong> Returns the size of the set or the number of elements in the set. Its time complexity is O(1).  </p>
+<p><strong>Traverse:</strong></p>
+<pre><code>void traverse(set&lt;int&gt; s)
+{
+    set &lt;int&gt;::iterator it;
+    for(it = s.begin();it != s.end();++it)
+        cout &lt;&lt; *it &lt;&lt;  ‘ ‘;
+    cout &lt;&lt; endl;
+ }
+</code></pre>
+<p><strong>Implementation:</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+using namespace std;
+
+int main()
+{
+    set &lt;int&gt; s;
+    set &lt;int&gt;::iterator it;
+    int A[] = {3, 5, 2, 1, 5, 4};
+    for(int i = 0;i &lt; 6;++i)
+        s.insert(A[i]);
+    for(it = s.begin();it != s.end();++it)
+        cout &lt;&lt; *it &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>1 2 3 4 5
+</code></pre>
+<p><strong>Maps</strong>
+Maps are containers which store elements by mapping their value against a particular key. It stores the combination of key value and mapped value following a specific order.
+Here key value are used to uniquely identify the elements mapped to it. The data type of key value and mapped value can be different. Elements in map are always in sorted order by their corresponding key and can be accessed directly by their key using bracket operator ([ ]).  </p>
+<p>In map, key and mapped value have a pair type combination,i.e both key and mapped value can be accessed using pair type functionalities with the help of iterators. </p>
+<p>//declaration. Here key values are of char type and mapped values(value of element) is of int type.</p>
+<pre><code>map &lt;char ,int &gt; mp;
+
+mp[‘b’]  = 1;
+</code></pre>
+<p>It will map value 1 with key ‘b’. We can directly access 1 by using mp[ ‘b’ ].</p>
+<pre><code>mp[‘a’] = 2;
+</code></pre>
+<p>It will map value 2 with key ‘a’.</p>
+<p>In map mp , the values be will be in sorted order according to the key.<br />
+<strong>Note:</strong> N is the number of elements in map.<br />
+Some Member Functions of map:<br />
+<strong>at( ):</strong> Returns a reference to the mapped value of the element identified with key.Its time complexity is O(logN). <br />
+<strong>count( ):</strong> searches the map for the elements mapped by the given key and returns the number of matches.As map stores each element with unique key, then it will return 1 if match if found otherwise return 0.Its time complexity is O(logN). <br />
+<strong>clear( ):</strong> clears the map, by removing all the elements from the map and leaving it with its size 0.Its time complexity is O(N). <br />
+<strong>begin( ):</strong> returns an iterator(explained above) referring  to the first element of map.Its time complexity is O(1). <br />
+<strong>end( ):</strong> returns an iterator referring to the theoretical element(doesn’t point to an element) which follows the last element.Its time complexity is O(1).<br />
+<strong>empty( ):</strong> checks whether the map is empty or not. It doesn’t modify the map.It returns 1 if the map is empty otherwise returns 0.Its time complexity is O(1).<br />
+<strong>erase( ):</strong> removes a single element or the range of element from the map.<br />
+<strong>find( ):</strong> Searches the map for the element with the given key, and returns an iterator to it, if it is present in the map otherwise it returns an iterator to the theoretical element which follows the last element of map.Its time complexity is O(logN). <br />
+<strong>insert( ):</strong> insert a single element or the range of element in the map.Its time complexity is O(logN), when only element is inserted and O(1) when position is also given.   </p>
+<p><strong>Implementation:</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;map&gt;
+using namespace std;
+int main(){
+    map &lt;char,int&gt; mp;
+    map &lt;char,int&gt; mymap,mymap1;
+
+    //insert elements individually in map with the combination of key value and value of element
+    mp.insert(pair&lt;char,int&gt;('a',2));   //key is 'c' and 2 is value.
+    mp.insert(pair&lt;char,int&gt;('b',1));
+    mp.insert(pair&lt;char,int&gt;('c',43));
+
+    //inserts elements in range using insert() function in map 'mymap'.
+    mymap.insert(mp.begin(),mp.end());
+
+    //declaring iterator for map
+    map &lt;char,int&gt;::iterator it;
+
+    //using find() function to return reference of element mapped by key 'b'.
+    it = mp.find('b');
+
+    //prints key and element's value.
+    cout&lt;&lt;"Key and element's value of map are: ";
+    cout&lt;&lt;it-&gt;first&lt;&lt;" and "&lt;&lt;it-&gt;second&lt;&lt;endl;
+
+    //alternative way to insert elements by mapping with their keys.
+    mymap1['x'] = 23;
+    mymap1['y'] = 21;
+
+    cout&lt;&lt;"Printing element mapped by key 'b' using at() function : "&lt;&lt;mp.at('b')&lt;&lt;endl;
+
+    //swap contents of 2 maps namely mymap and mymap1.
+    mymap.swap(mymap1);
+
+    /* prints swapped elements of mymap and mymap1 by iterating all the elements through    
+        using   iterator. */
+    cout&lt;&lt;"Swapped elements and their keys of mymap are: "&lt;&lt;endl;
+    for(it=mymap.begin();it!=mymap.end();it++)
+    {
+    cout&lt;&lt;it-&gt;first&lt;&lt;" "&lt;&lt;it-&gt;second&lt;&lt;endl;
+    }
+    cout&lt;&lt;"Swapped elements and their keys of mymap1 are: "&lt;&lt;endl;
+    for(it=mymap1.begin();it!=mymap1.end();it++)
+    {
+    cout&lt;&lt;it-&gt;first&lt;&lt;" "&lt;&lt;it-&gt;second&lt;&lt;endl;
+    }
+    //erases element mapped at 'c'.
+    mymap1.erase('c');
+
+    //prints all elements of mymap after erasing element at 'c'.
+
+    cout&lt;&lt;"Elements of mymap1 after erasing element at key 'c' : "&lt;&lt;endl;
+    for(it=mymap1.begin();it!=mymap1.end();it++)
+    {
+    cout&lt;&lt;it-&gt;first&lt;&lt;" "&lt;&lt;it-&gt;second&lt;&lt;endl;
+    }
+
+    //erases elements in range from mymap1
+    mymap1.erase(mymap1.begin(),mymap1.end());
+
+    cout&lt;&lt;"As mymap1 is empty so empty() function will return 1 : " &lt;&lt; mymap1.empty()&lt;&lt;endl;
+
+    //number of elements with key = 'a' in map mp.
+    cout&lt;&lt;"Number of elements with key = 'a' in map mp are : "&lt;&lt;mp.count('a')&lt;&lt;endl;
+
+    //if mp is empty then itmp.empty will return 1 else 0.
+    if(mp.empty())
+    {
+        cout&lt;&lt;"Map is empty"&lt;&lt;endl;
+    }
+    else
+    {
+        cout&lt;&lt;"Map is not empty"&lt;&lt;endl;
+    }
+
+    return 0;
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Key and element's value of map are: b and 1
+Printing element mapped by key 'b' using at() function : 1
+Swapped elements and their keys of mymap are: 
+x 23
+y 21
+Swapped elements and their keys of mymap1 are: 
+a 2
+b 1
+c 43
+Elements of mymap1 after erasing element at key 'c' : 
+a 2
+b 1
+As mymap1 is empty so empty() function will return 1 : 1
+Number of elements with key = 'a' in map mp are : 1
+Map is not empty
+</code></pre>
+<p><strong>List</strong><br />
+List is a sequence container which takes constant time in inserting and removing elements. List in STL is implemented  as Doubly Link List.</p>
+<p>The elements from List cannot be directly accessed. For example to access element of a particular position ,you have to iterate from a known position to that particular position. </p>
+<p>//declaration</p>
+<pre><code>list &lt;int&gt; LI;
+</code></pre>
+<p>Here LI can store elements of int type.</p>
+<p>// here LI will have 5 int elements of value 100. </p>
+<pre><code>list&lt;int&gt; LI(5, 100)
+</code></pre>
+<p>Some of the member function of List:<br />
+<strong>begin( ):</strong> It returns an iterator pointing to the first element in list.Its time complexity is O(1). <br />
+<strong>end( ):</strong> It returns an iterator referring to the theoretical element(doesn’t point to an element) which follows the last element.Its time complexity is O(1). <br />
+<strong>empty( ):</strong> It returns whether the list is empty or not.It returns 1 if the list is empty otherwise returns 0.Its time complexity is O(1). <br />
+<strong>assign( ):</strong> It assigns new elements to the list by replacing its current elements and change its size accordingly.It time complexity is O(N).<br />
+<strong>back( ):</strong> It returns reference to the last element in the list.Its time complexity is O(1). <br />
+<strong>erase( ):</strong> It removes a single element or the range of element from the list.Its time complexity is O(N). <br />
+<strong>front( ):</strong> It returns reference to the first element in the list.Its time complexity is O(1). <br />
+<strong>push_back( ):</strong> It adds a new element at the end of the list, after its current last element. Its time complexity is O(1). <br />
+<strong>push_front( ):</strong> It adds a new element at the beginning of the list, before its current first element. Its time complexity is O(1). <br />
+<strong>remove( ):</strong> It removes all the elements from the list, which are equal to given element. Its time complexity is O(N). <br />
+<strong>pop_back( ):</strong>  It removes the last element of the list, thus reducing its size by 1. Its time complexity is O(1). <br />
+<strong>pop_front( ):</strong> It removes the first element of the list, thus reducing its size by 1. Its time complexity is O(1). <br />
+<strong>insert( ):</strong> It insert new elements in the list before the element on the specified position. Its time complexity is O(N). <br />
+<strong>reverse ( ):</strong> It reverses the order of elements in the list. Its time complexity is O(N). <br />
+<strong>size( ):</strong> It returns the number of elements in the list. Its time complexity is O(1).   </p>
+<p><strong>Implementation:</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;list&gt;
+using namespace std;
+int main()
+{
+    list &lt;int&gt; LI;
+    list &lt;int&gt;::iterator it;
+    //inserts elements at end of list
+    LI.push_back(4);
+    LI.push_back(5);
+
+    //inserts elements at beginning of list
+    LI.push_front(3);
+    LI.push_front(5);
+
+    //returns reference to first element of list
+    it = LI.begin();
+
+    //inserts 1 before first element of list
+    LI.insert(it,1);
+
+    cout&lt;&lt;"All elements of List LI are: " &lt;&lt;endl;
+    for(it = LI.begin();it!=LI.end();it++)
+    {
+        cout&lt;&lt;*it&lt;&lt;" ";
+    }
+    cout&lt;&lt;endl;
+
+    //reverse elements of list
+    LI.reverse();
+
+    cout&lt;&lt;"All elements of List LI are after reversing: " &lt;&lt;endl;
+    for(it = LI.begin();it!=LI.end();it++)
+    {
+         cout&lt;&lt;*it&lt;&lt;" ";
+    }
+    cout&lt;&lt;endl;
+
+    //removes all occurences of 5 from list
+    LI.remove(5);
+
+    cout&lt;&lt;"Elements after removing all occurence of 5 from List"&lt;&lt;endl;
+    for(it = LI.begin();it!=LI.end();it++)
+    {
+         cout&lt;&lt;*it&lt;&lt;" ";
+    }
+    cout&lt;&lt;endl;
+
+    //removes last element from list
+    LI.pop_back();
+    //removes first element from list
+    LI.pop_front();
+    return 0;
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>All elements of List LI are: 
+1 5 3 4 5 
+All elements of List LI are after reversing: 
+5 4 3 5 1 
+Elements after removing all occurrence of 5  from List
+4 3 1
+</code></pre>
+<p><strong>Stacks:</strong><br />
+Stack is a container which follows the <strong>LIFO (Last In First Out)</strong> order and the elements are inserted and deleted from one end of the container. The element which is inserted last will be extracted first.</p>
+<p>Declaration:</p>
+<pre><code>stack &lt;int&gt; s;
+</code></pre>
+<p>Some of the member functions of Stack are: <br />
+<strong>push( ):</strong> Insert element at the top of stack. Its time complexity is O(1). <br />
+<strong>pop( ):</strong> removes element from top of stack. Its time complexity is O(1). <br />
+<strong>top( ):</strong> access the top element of stack. Its time complexity is O(1). <br />
+<strong>empty( ):</strong> checks if the stack is empty or not. Its time complexity is O(1). <br />
+<strong>size( ):</strong> returns the size of stack. Its time complexity is O(1).   </p>
+<p><strong>Implementation:</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;stack&gt;
+
+using namespace std;
+int main( )
+{
+    stack &lt;int&gt; s;  // declaration of stack
+
+    //inserting 5 elements in stack from 0 to 4.
+    for(int i = 0;i &lt; 5; i++)
+    {
+        s.push( i ) ;
+    }
+
+    //Now the stack is {0, 1, 2, 3, 4}
+
+    //size of stack s
+    cout&lt;&lt;”Size of stack is: ” &lt;&lt;s.size( )&lt;&lt;endl;
+
+    //accessing top element from stack, it will be the last inserted element.
+    cout&lt;&lt;”Top element of stack is: ” &lt;&lt;s.top( ) &lt;&lt;endl ;
+
+    //Now deleting all elements from stack 
+for(int i = 0;i &lt; 5;i++)
+    {
+        s.pop( );
+}
+
+//Now stack is empty,so empty( ) function will return true.
+
+if(s.empty())
+{
+    cout &lt;&lt;”Stack is empty.”&lt;&lt;endl;
+}
+else
+{
+    cout &lt;&lt;”Stack is Not empty.”&lt;&lt;endl;
+}
+
+return 0;
+
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Size of stack is: 5
+Top element of stack is: 4
+</code></pre>
+<p><strong>Queues:</strong><br />
+Queue is a container which follows <strong>FIFO order (First In First Out)</strong> . Here elements are inserted at one end (rear ) and extracted from another end(front) .</p>
+<p>Declaration:</p>
+<pre><code>queue &lt;int&gt; q;
+</code></pre>
+<p>Some member function of Queues are:<br />
+<strong>push( ):</strong> inserts an element in queue at one end(rear ). Its time complexity is O(1). <br />
+<strong>pop( ):</strong> deletes an element from another end if queue(front). Its time complexity is O(1). <br />
+<strong>front( ):</strong> access the element on the front end of queue. Its time complexity is O(1). <br />
+<strong>empty( ):</strong> checks if the queue is empty or not. Its time complexity is O(1). <br />
+<strong>size( ):</strong> returns the size of queue. Its time complexity is O(1).   </p>
+<p><strong>Implementation:</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;queue&gt;
+
+using namespace std;
+
+int main() {
+    char qu[4] = {'a', 'b', 'c', 'd'};        
+    queue &lt;char&gt; q;
+    int N = 3;                            // Number of steps
+    char ch;
+    for(int i = 0;i &lt; 4;++i)
+        q.push(qu[i]);
+    for(int i = 0;i &lt; N;++i) {
+            ch = q.front();
+    q.push(ch);
+            q.pop();
+    }
+    while(!q.empty()) {
+        printf("%c", q.front());
+    q.pop();
+}
+    printf("\n");
+    return 0;
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>dabc
+</code></pre>
+<p><strong>Priority Queue:</strong><br />
+A priority queue is a container that provides constant time extraction of the largest element, at the expense of logarithmic insertion. It is similar to the heap in which we can add element at any time but only the maximum element can be retrieved. In a priority queue, an element with high priority is served before an element with low priority. </p>
+<p>Declaration:</p>
+<pre><code>priority_queue&lt;int&gt; pq;
+</code></pre>
+<p>Some member functions of priority queues are:<br />
+<strong>empty():</strong> Returns true if the priority queue is empty and false if the priority queue has at least one element. Its time complexity is O(1).<br />
+<strong>pop():</strong> Removes the largest element from the priority queue. Its time complexity is O(logN) where N is the size of the priority queue.<br />
+<strong>push():</strong> Inserts a new element in the priority queue. Its time complexity is O(logN) where N is the size of the priority queue.<br />
+<strong>size():</strong> Returns the number of element in the priority queue. Its time complexity is O(1).<br />
+<strong>top():</strong> Returns a reference to the largest element in the priority queue. Its time complexity is O(1).  </p>
+<p><strong>Implementation:</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;queue&gt;
+
+using namespace std;
+
+int main()
+{
+    priority_queue&lt;int&gt; pq;
+    pq.push(10);
+    pq.push(20);
+    pq.push(5);
+    while(!pq.empty())
+    {
+        cout &lt;&lt; pq.top() &lt;&lt; endl;
+        pq.pop();
+    }
+    return 0;
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>20
+10
+5
+</code></pre>
+    </div> <!-- end note-body -->
+
+    
+    <div class="social-share medium-margin content">
+        <!-- fb, twitter, g+ buttons -->
+        <!-- the urls are messed up because they were changed post launch -->
+        <div class="float-left less-margin-3">
+            <div class="fb-like float-left standard-margin-right" data-href="https://notes/standard-template-library/" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="lucida grande"></div>
+            <div class="float-left medium-margin-left"><a href="https://twitter.com/share" class="twitter-share-button" data-url="https://notes/standard-template-library/" data-text="Standard Template Library via @HackerEarth" data-via="">Tweet</a></div>
+            <div class="float-left"><g:plusone href="https://notes/standard-template-library/" size="medium"></g:plusone></div>
+        </div>
+        <!-- end of social buttons -->
+        <div class="clear"></div>
+    </div> <!-- social-share -->
+    
+
+    
+    <div id="comments-320-555" class="pagelet-inview comments standard-margin" ajax="/comment-action/load-comments/555/320/" target="comments-320-555"></div>
+    
+</div> <!-- end notes-container -->
+
+        </div><!-- left -->
+
+        <div class="right medium-margin">
+            <div class="right-box">
+                <div class="title"><i class="fa fa-magic less-margin-bottom"></i> Author</div>
+                <hr class="hr-dashed"></hr>
+                        
+                <div class="content">
+                    <div class="notes-user-info ">
+                        <a href="/users/r3gz3n/" class="profile-pic inline-block medium-margin-right v-align-top">
+                            <img src="https://d320jcjashajb2.cloudfront.net/media/avatars/r3gz3n/resized/80/fbff6fcff7-advent-children-02b.jpg" alt="r3gz3n" width="80" height="80" />
+                        </a>
+                        <div class="inline-block user-info light small">
+                            <a href="/users/r3gz3n/" class="inline-block large dark weight-600 hover-link">Akash Sharma</a>
+                            
+                            <div class="user-job-info ellipsis" title="Summer Intern at HackerEarth"><i class="fa fa-briefcase small"></i> Summer Intern at HackerEarth</div>
+                            
+                            
+                            <div><i class="fa fa-map-marker small"></i> Dehradun</div>
+                            
+                            <div><a href="/notes/u/r3gz3n/" class="light weight-600"><i class="fa fa-file-text-o small"></i> 3 notes</a></div>
+                        </div> <!-- user-info -->
+                    </div> <!-- notes-user-info -->
+                </div> <!-- content -->
+            </div> <!-- right-box -->
+
+            
+            <div class="right-box">
+                
+
+
+
+<div class="action">
+    <div id="create-note">
+        <a href="/notes/new/" class="weight-600 dark regular less-margin">Write Note</a>
+    </div>
+
+    <hr class="hr-dashed"/>
+    <div id="my-notes">
+        <a href="/notes/u/ranjan9/" class="weight-600 dark regular less-margin">My Notes</a>
+    </div>
+
+    <hr class="hr-dashed"/>
+    <div id="drafts">
+        <a href="/notes/drafts/" class="weight-600 dark regular less-margin">Drafts</a>
+    </div>
+</div> <!-- content -->
+
+            </div><!-- right-container -->
+            
+
+            <div class="right-box" id="8304bbe"></div>
+
+        </div> <!-- right -->
+        <div class="clear"></div>
+
+    </div> <!-- responsive-container -->
+</div> <!-- responsive-page -->
+
+
+    <!-- include modal window for login/signup -->
+    
+
+    <!-- override this block where we do not want the footer -->
+    
+    
+        
+        <div class="footer-large">
+    <div class="content align-center">
+        <div class="section">
+            <h1 class="category-title">About Us</h1>
+            <ul>
+                <li><a target="_blank" href="http://blog.hackerearth.com/">Blog</a></li>
+                <li><a target="_blank" href="http://engineering.hackerearth.com/">Engineering Blog</a></li>
+
+                <li><a target="_blank" href="http://news.hackerearth.com/">Updates & Releases </a></li>
+
+                <li><a target="_blank" href="//www.hackerearth.com/team/">Team</a></li>
+                <li><a target="_blank" href="//www.hackerearth.com/careers/">Careers</a></li>
+                <li><a target="_blank" href="//www.hackerearth.com/in-media/">In the Press</a></li>
+            </ul>
+        </div>
+        <div class="section">
+            <h1 class="category-title">HackerEarth</h1>
+            <ul>
+                <li><a target="_blank" href="https://www.hackerearth.com/docs/api/developers/code/legacy/">API</a></li>
+                <li><a target="_blank" href="https://chrome.google.com/webstore/detail/hackerearth-extension/aileihjgpakhkhedejpkpamnhpbnjhoj?ref=footer">Chrome Extension</a></li>
+                <li><a target="_blank" href="//code.hackerearth.com">CodeTable</a></li>
+                <li><a target="_blank" href="//learn.hackerearth.com/">HackerEarth Academy</a></li>
+                <li><a href="//www.hackerearth.com/about/profile/">Developer Profile</a></li>
+                <li><a href="//www.hackerearth.com/resume/">Resume</a></li>
+                <li><a href="//www.hackerearth.com/campus/">Campus Ambassadors</a></li>
+                <li><a href="//www.hackerearth.com/get-me-hired/">Get Me Hired</a></li>
+                <li><a target="_blank" href="//www.hackerearth.com/privacy/">Privacy</a></li>
+                <li><a target="_blank" href="//www.hackerearth.com/terms-of-service/">Terms of Service</a></li>
+                <!--
+                <li><a target="_blank" href="http://status.hackerearth.com">System Status</a></li>
+                <li><a target="_blank" href="http://webchat.freenode.net/?channels=%23hackerearth">IRC</a></li>
+                -->
+            </ul>
+        </div>
+        <div class="section">
+            <h1 class="category-title">Developers</h1>
+            <ul>
+                <li><a href="//www.hackerearth.com/docs/wiki/developers/judge/">Judge Environment</a></li>
+                <li><a href="//www.hackerearth.com/docs/wiki/developers/solution-guide/">Solution Guide</a></li>
+                <li><a href="//www.hackerearth.com/docs/wiki/developers/setter-guide/">Problem Setter Guide</a></li>
+                <li><a href="//www.hackerearth.com/problems/">Practice Problems</a></li>
+                <li><a href="//www.hackerearth.com/challenges/">HackerEarth Challenges</a></li>
+                <li><a href="//www.hackerearth.com/college-challenges/">College Challenges</a></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h1 class="category-title">Recruit</h1>
+            <ul>
+                <li><a target="_blank" href="//www.hackerearth.com/recruit/source/">Developer Sourcing</a></li>
+                <li><a target="_blank" href="//www.hackerearth.com/recruit/lateral/">Lateral Hiring</a></li>
+                <li><a target="_blank" href="//www.hackerearth.com/recruit/campus/">Campus Hiring</a></li>
+                <li><a target="_blank" href="//www.hackerearth.com/recruit/faq/">FAQs</a></li>
+                <li><a target="_blank" href="//www.hackerearth.com/recruit/#customers-speak">Customers</a></li>
+                <li><a target="_blank" href="//www.hackerearth.com/annual-report-2014/">Annual Report</a></li>
+            </ul>
+
+        </div>
+        <div class="section connect">
+            <h1 class="category-title">Connect with us</h1>
+            <div class="map medium-margin-right">
+                <div style="overflow:hidden;height:130px;width:200px;">
+                    <div id="gmap_canvas" style="height:130px;width:200px;"></div>
+                    <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
+                </div>
+                <p class="lighter small">
+                III<sup>rd</sup> Floor, Salarpuria Business Center,<br/>4<sup>th</sup> B Cross Road, 5<sup>th</sup> A Block,<br/>Koramangala Industrial Layout,<br/>Bangalore, Karnataka 560095,<br/>India.
+                </p>
+                <!--<a class="mixpanel-logo" href="https://mixpanel.com/f/partner"><img src="//cdn.mxpnl.com/site_media/images/partner/badge_light.png" alt="Mobile Analytics" /></a>-->
+
+            </div>
+            <div class="reach">
+                <h1 class="category-title">Reach us</h1>
+                <p class="lighter small weight-600">
+                contact@hackerearth.com<br/><!--+91-80-4155-4695<br/>-->+91-776-057-2339
+                </p>
+                <div class="less-margin-2 social-links large">
+                    <a href="https://www.facebook.com/HackerEarth" class="float-left lighter medium-margin-right" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                    <a href="https://twitter.com/hackerearth" class="float-left lighter medium-margin-right" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                    <a href="https://www.linkedin.com/company/hackerearth" class="float-left lighter medium-margin-right" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+                    <a href="https://plus.google.com/+Hackerearth" class="float-left lighter medium-margin-right" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+                    <div class="clear"></div>
+                </div>
+            </div> <!-- reach -->
+        </div> <!-- connect -->
+    </div> <!-- end content -->
+    <div class="footer-bottom lighter small medium-margin align-center">
+            Copyright &copy 2015 HackerEarth Inc.
+    </div>
+
+</div> <!-- footer -->
+
+        
+    
+    
+
+    <div class="expand-box" id="recruiter-box">
+        <div class="down-arrow"></div>
+        <ul class="no-margin">
+            
+            <a href="/recruiter/"><li>Console</li></a>
+            <a href="/password/change/"><li>Change Password</li></a>
+            <a href="/logout/?next=//notes/standard-template-library/"><li>Logout</li></a>
+        </ul>
+    </div>
+
+    
+    <div class="expand-box" id="hacker-box">
+        <div class="down-arrow"></div>
+        <ul class="no-margin">
+            
+                
+                <a class="track-header-profile-box-messages" href="/messages/"><li>Messages</li></a>
+                <a class="track-header-profile-box-submissions" href="/submissions/ranjan9/"><li>Submissions</li></a>
+                <a class="track-header-profile-box-invite" href="/invite/"><li>Invite Friends</li></a>
+
+                <hr class="hr"/>
+
+                <a class="track-header-profile-box-notes" href="/notes/"><li>Notes</li></a>
+                <a class="track-header-profile-box-practice" href="/docs/wiki/developers/"><li>Docs</li></a>
+                <a class="track-header-profile-box-api" target="_blank" href="/docs/api/developers/"><li>API</li></a>
+
+                <hr class="hr"/>
+
+                
+                <a class="track-header-profile-box-getstarted" href="/academy/getstarted/"><li>Get Started</li></a>
+                
+                <a class="track-header-profile-box-settings" href="/users/profile-settings/"><li>Settings</li></a>
+                <a class="track-header-profile-box-logout" href="/logout/?next=//notes/standard-template-library/"><li>Logout</li></a>
+            
+        </ul>
+    </div> <!-- hacker-box -->
+    
+
+    <!-- Include notifications box -->
+    
+
+<div class="expand-box" id="notifications-box">
+    <div class="down-arrow"></div>
+    <div class="notifications-title-container">
+        <div class="float-left weight-600">Notifications</div>
+        <div class="float-right">
+            <a href="#" ajax="/notifications/AJAX/mark-all-read/" class="notif-mark-all-read link smaller clicky-ajax">Mark All as Read</a>
+        </div>
+        <div class="clear"></div>
+    </div> <!-- notifications-title-container -->
+
+    <div class="notifications-container nice-scrollbar" id="notifications-container">
+    </div> <!-- notifications-container -->
+
+    <div class="smaller caps weight-600 align-center less-margin-2 less-margin-2-bottom">
+        <a class="link" href="/notifications/">View All Notifications</a>
+    </div>
+</div> <!-- notifications-box -->
+
+
+    <!-- Load notification icon with unread count -->
+    <div id="header-notif-icon-trigger" class="load-pagelet hidden" target="header-notif-icon" ajax="/notifications/pagelets/header-notif-icon-count/" show-loader="false"></div>
+
+    
+    <!-- Load live events widget -->
+    <div id="live-events-trigger" class="load-pagelet hidden" target="live-events-trigger-data" ajax="/AJAX/live_feed_count/" show-loader="false"></div>
+    
+
+
+
+        <!-- for adding extra html to the body, generally if you want to add absolute position that appear on click
+             then add them in this block. Please make sure that this block is not already being filled by the parent
+             template, if that is the case then to block.super after extending this block -->
+        
+        
+        
+
+        <!-- Store any json returned for bigpipe -->
+        <div id="bigpipe-json" class="hidden">
+            {&quot;8304bbe&quot;: &quot;/recommendation/pagelets/trending-card/?sensual=True&quot;}
+        </div>
+
+        <!-- Store any json returned for bigpipe -->
+        <div id="user-prompt-json" class="hidden">
+            {}
+        </div>
+
+        <!-- realtime host -->
+        <div id="realtime-host" class="hidden">realtime.hackerearth.com</div>
+        <!-- realtime port -->
+        <div id="realtime-port" class="hidden">80</div>
+
+        <!-- client name for updating parts of page in realtime -->
+        <div id="pusher-channel-name-0" class="hidden">f62d5e4c3cd34790e0ba31694c69b1d875aeca15</div>
+        
+        
+        <div id="pusher-channel-name-1" class="hidden">private-2554e1da13f75ead90c55e4936602d3aafbfa5c7</div>
+        
+        
+
+        <!-- pusher app key -->
+        <div id="pusher-app-key" class="hidden">58a29e5cae2309f04b28</div>
+
+        <!-- All the scripts go here -->
+        <script>
+            var CURRENT_PATH = "https://notes/standard-template-library/";
+            var HISTORY = '';
+        </script>
+
+        
+        <!-- alljs: static_media/js/jquery-1.7.min.patched.js static_media/js/jquery.color.js static_media/js/jquery.elastic.js static_media/js/ajaxSend.js  static_media/js/jquery.inview.js  static_media/js/tooltip/jquery.tipTip.modified.js  static_media/offline/offline.min.js  static_media/js/watermark.min.js  static_media/history.js/scripts/bundled/html4html5/jquery.history.js  static_media/js/jquery.nicescroll.js  static_media/simplemodal/simplemodal.js static_media/js/jquery.sticky.js static_media/js/pusher.min.js -->
+
+        <script type='text/javascript' src="https://d320jcjashajb2.cloudfront.net/static/js/alljs.js?v=1.2"></script>
+
+        <script type='text/javascript' src="https://d320jcjashajb2.cloudfront.net/static/feeds/feeds.js"></script>
+        <script type='text/javascript' src='https://d320jcjashajb2.cloudfront.net/static/base/base1.0.1.js?v=5.1'></script>
+        <script type='text/javascript' src='https://d320jcjashajb2.cloudfront.net/static/base/mixpanel.js'></script>
+        <script type='text/javascript' src='https://d320jcjashajb2.cloudfront.net/static/bigpipe/bigpipe.js?v=0.2'></script>
+        <script type='text/javascript' src='https://d320jcjashajb2.cloudfront.net/static/realtime/pusher_realtime.js?v=1'></script>
+        <script type='text/javascript' src='https://d320jcjashajb2.cloudfront.net/static/user_prompts/userprompt.js?v=0.3'></script>
+        <script type='text/javascript' src="https://d320jcjashajb2.cloudfront.net/static/search/search.1.0.js"></script>
+        <script type='text/javascript' src='https://d320jcjashajb2.cloudfront.net/static/base/history.js'></script>
+        <script type='text/javascript' src='https://d320jcjashajb2.cloudfront.net/static/js/commentUtils.js'></script>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+        
+
+        <script>
+            Offline.options = {
+                interceptRequests: false,
+                requests: false,
+            };
+        </script>
+
+        <script>
+            // do all maps stuff here
+            function initializeMaps(){
+
+                // Call other map functions
+                try{
+                    window.mapStuff();
+                } catch(err){
+                }
+
+                try{
+                    // Display footer maps
+                    var myOptions = {
+                        zoom:14,
+                        center:new google.maps.LatLng(12.9337468, 77.6149422),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    var map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
+                    var marker = new google.maps.Marker({
+                                map: map,
+                                position: new google.maps.LatLng(12.9337468, 77.6149422)
+                            });
+                    var infowindow = new google.maps.InfoWindow({
+                                    content:"<b>HackerEarth Technologies</b>"
+                                });
+                    google.maps.event.addListener(marker, "click", function(){
+                            infowindow.open(map,marker);
+                    });
+
+                }
+                catch(e){}
+            }
+
+            function loadMaps() {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&callback=initializeMaps'
+                document.body.appendChild(script);
+            }
+
+            $(document).ready(function(){
+                loadMaps();
+            });
+
+        </script>
+        
+<script>(function() {
+    var _fbq = window._fbq || (window._fbq = []);
+    if (!_fbq.loaded) {
+        var fbds = document.createElement('script');
+        fbds.async = true;
+        fbds.src = '//connect.facebook.net/en_US/fbds.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(fbds, s);
+        _fbq.loaded = true;
+    }
+    _fbq.push(['addPixelId', '802574803157043']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=802574803157043&amp;ev=PixelInitialized" /></noscript>
+
+<script>
+$(document).ready(function (){
+    $('#header-notif-icon-trigger').click();
+
+    
+    $('#live-events-trigger').click();
+    
+
+    
+});
+</script>
+
+
+        <script>
+            // Used in search
+            var is_user_logged_in = true;
+        </script>
+
+        <script type="text/javascript" src="https://d320jcjashajb2.cloudfront.net/static/js/detect_timezone.js"></script>
+        <script>
+            $(document).ready(function(){
+                var timezone = jstz.determine_timezone(); // Now you have an instance of the TimeZone object.
+                
+                    var profile_timezone = "Asia/Kolkata";
+                    if (timezone.name() !== profile_timezone) {
+                        $.ajax({
+                            type: "POST",
+                            url:"/users/AJAX/set-timezone/",
+                            data: {
+                            'timezone': timezone.name(),
+                            },
+                        });
+                    }
+                
+
+                
+            });
+        </script>
+
+        
+            
+            
+            <script>
+            $(document).ready(function(){
+                mixpanel.identify("185282");
+                mixpanel.people.set({
+                    "$email": "ranjan1395@gmail.com",
+                    "$name": "Ranjan kumar",
+                    "$username": "ranjan9",
+                    "$created": "Oct. 13, 2014, 8:34 a.m.",
+                    "profile_url": "https://www.hackerearth.com/users/ranjan9/",
+                });
+            });
+            </script>
+            
+        
+
+        
+<script type="text/javascript" src="https://d320jcjashajb2.cloudfront.net/static/google-code-prettify/prettifyall.js"></script>
+<script type="text/javascript" src="https://d320jcjashajb2.cloudfront.net/static/notes/votes.js"></script>
+<script type="text/javascript" src="https://d320jcjashajb2.cloudfront.net/static/tagging_autocomplete/tagging_autocomplete.js"></script>
+
+<script>
+    $("#notes-title-bar").sticky({
+        bottomSpacing: 600,
+    });
+    $("#notes-title-bar").width($("#notes-left-container").width()+ 'px');
+</script>
+
+<script>
+$(document).ready(function() {
+    styleCode();
+});
+</script>
+
+
+        
+        <!-- google analytics start -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-34729975-1', 'auto');
+            ga('require', 'displayfeatures');
+            
+            ga('set', '&uid', 185282);
+            
+            ga('send', 'pageview');
+        </script>
+        <!-- google analytics end -->
+        
+
+        
+        <!-- mixpanel analytics start -->
+        <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);mixpanel.init("2c650cdba1ecc12ee46abca1c5a9a66b");</script>
+        <!-- mixpanel analytics end -->
+        
+
+        <div id="fb-root"></div>
+        <script>
+            <!-- facebook button -->
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=109964005787822";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            <!-- twitter button -->
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+            <!-- google+ button -->
+            (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
+        </script>
+
+        
+        <script>
+        // Include the UserVoice JavaScript SDK (only needed once on a page)
+        UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/5F90ycbP4JOg1fOUoELScA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+        //
+        // UserVoice Javascript SDK developer documentation:
+        // https://www.uservoice.com/o/javascript-sdk
+        //
+
+        // Set colors
+        UserVoice.push(['set', {
+          accent_color: '#448dd6',
+          trigger_color: 'white',
+          trigger_background_color: 'rgba(46, 49, 51, 0.6)'
+        }]);
+
+        // Identify the user and pass traits
+        // To enable, replace sample data with actual user traits and uncomment the line
+        UserVoice.push(['identify', {
+          //email:      'john.doe@example.com', // User’s email address
+          //name:       'John Doe', // User’s real name
+          //created_at: 1364406966, // Unix timestamp for the date the user signed up
+          //id:         123, // Optional: Unique id of the user (if set, this should not change)
+          //type:       'Owner', // Optional: segment your users by type
+          //account: {
+          //  id:           123, // Optional: associate multiple users with a single account
+          //  name:         'Acme, Co.', // Account name
+          //  created_at:   1364406966, // Unix timestamp for the date the account was created
+          //  monthly_rate: 9.99, // Decimal; monthly rate of the account
+          //  ltv:          1495.00, // Decimal; lifetime value of the account
+          //  plan:         'Enhanced' // Plan name for the account
+          //}
+        }]);
+
+        // Add default trigger to the bottom-right corner of the window:
+        UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
+
+        // Or, use your own custom trigger:
+        //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
+
+        // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+        UserVoice.push(['autoprompt', {}]);
+        </script>
+        
+
+    </body>
+</html>

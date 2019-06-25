@@ -1,0 +1,50 @@
+cls : clears screen
+show dbs : shows all the databases
+
+use database_name : creates a database with name 'database_name' if the database doesn't exist
+		   otherwise switch to the database
+
+db : shows the current database
+
+db.createCollection('collection_name') : creates a collection (or simply relate it to tables in relational databases)
+
+show collections : shows all the collections of the current database
+
+db.collection_name.insert({key: 'value'}, {...}, ...) : insert the key-value pairs into the 'collection_name' collection
+//Note : to insert an array of objects, put [] around the data.  e.g.
+
+db.collection_name.insert([{data1}, {data2}, ... ])
+
+db.collection_name.find() : shows all the data in the 'collection_name' collection
+
+db.collection_name.find().pretty() : shows all the data in the 'collection_name' collection in formatted manner
+
+
+db.collection_name.findOne() : shows the first data in the list of data in 'collection_name' or shows the recently 
+				added/updated data
+
+db.collection_name.drop() : deletes the 'collection_name' from the current database
+
+db.collection_name.update( {'id'}, {updated data} ) : update the object with id 'id' (mongodb autimatically adds an
+object id to each object data inserted to the collection) to the new updated data.
+
+db.collection_name.remove( {'id'} ) : removes the object data with id 'id' 
+
+db.collection_name.find().sort( {first_name: 1} )  : shows the collection_name data in sorted order by first_name
+						     using -1 as value will sort the obejects in descending order 
+
+db.collection_name.find().count() : shows the number of objects stored in collection_name
+
+db.collection_name.find({gender: "male"}).count()  : shows the number of objects having gender attribute as male in collection_name
+
+db.collection_name.find().limit(4) : shows only the first 4 objects of collection_name
+
+db.collection_name.getIndexes() : shows all the indexes of the collection name
+
+db.collection_name.dropIndex({"age":1}) : deletes the index "age" from collection_name
+
+$lt: 23  : less than 23  , eg, db.users.find( { "age": {$lt: 23} } ) 
+$set : {gender : "male", age : 26}   : adds these new data to the specified object
+$unset : {gender : "male"}  : removes the gender data from the specified object
+$inc : {age : 5}  : incement the age by 5
+$rename : {gender : "sex"}  : rename the key gender as sex

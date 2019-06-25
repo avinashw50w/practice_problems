@@ -1,0 +1,14 @@
+Depth-first Search
+Breadth-first Search.
+Huffman encoding algorithm
+Kruskal, Prim Algorithm (Minimum spanning Tree)
+Dijkstra Algorithm (Finding the shortest path)
+Dynamic Programming and Greedy Algorithms
+String comparison Algorithms
+Sorting Algorithms - Quick sort, Merge Sort, Selection Sort Bubble sort.
+Searching Algorithms  - Binary, Linear and Hash Search.
+Bipartite matching
+Divide and conquer 
+Knapsack
+
+traveling salesman problem

@@ -1,0 +1,89 @@
+*To Add Column to existing Table
+
+alter table table-name add(column-name datatype);
+alter table Student add(address char);
+
+*To Add Multiple Column to existing Table
+
+alter table table-name add(column-name1 datatype1, column-name2 datatype2, column-name3 datatype3);
+alter table Student add(father-name varchar(60), mother-name varchar(60), dob date); 
+
+*To Add column with Default Value
+
+alter table table-name add(column-name1 datatype1 default data);
+alter table Student add(dob date default '1-Jan-99'); 
+
+*To Modify an existing Column
+
+alter table table-name modify(column-name datatype);
+alter table Student modify(address varchar(30)); 
+
+*To Rename a column
+
+alter table table-name rename old-column-name to column-name;
+alter table Student rename address to Location;
+
+*To Drop a Column
+
+alter table table-name drop(column-name);
+alter table Student drop(address);
+
+*truncate command
+
+truncate command removes all records from a table. But this command will not destroy the table's structure. 
+When we apply truncate command on a table its Primary key is initialized. Following is its Syntax,
+
+truncate table table-name
+Here is an Example explaining it.
+
+truncate table Student;
+The above query will delete all the records of Student table.
+
+truncate command is different from delete command. delete command will delete all the rows from a table 
+whereas truncate command re-initializes a table(like a newly created table).
+
+*drop command
+
+drop query completely removes a table from database. This command will also destroy the table structure. 
+drop table table-name
+
+*rename query
+
+rename command is used to rename a table.
+
+rename table old-table-name to new-table-name
+rename table Student to Student-record;
+
+*INSERT command
+
+INSERT into table-name values(data1,data2,..)
+INSERT into Student values(101,'Adam',15);
+
+Example to Insert NULL value to a column
+
+Both the statements below will insert NULL value into age column of the Student table.
+
+INSERT into Student(id,name) values(102,'Alex');
+Or,
+INSERT into Student values(102,'Alex',null);
+
+*UPDATE command
+
+UPDATE table-name set column-name = value where condition;
+update Student set age=18 where s_id=102;
+
+Example to Update multiple columns
+
+UPDATE Student set s_name='Abhi',age=17 where s_id=103;
+
+*3) Delete command
+
+Delete command is used to delete data from a table. 
+Delete command can also be used with condition to delete a particular row. 
+
+DELETE from table-name;
+DELETE from Student;
+The above command will delete all the records from Student table.
+
+DELETE from Student where s_id=103;
+

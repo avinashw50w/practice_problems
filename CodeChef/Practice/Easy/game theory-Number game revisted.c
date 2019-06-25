@@ -1,0 +1,26 @@
+#include <stdio.h>
+int main(){
+	int t,n;
+	scanf("%d",&t);
+	while(t--){
+		scanf("%d",&n);
+		(n%4==1)? puts("ALICE") : puts("BOB");
+	}
+	return 0;
+}
+
+/* Alice and Bob play the following game.They choose a number N to play with.The runs are as follows : 
+
+1.Bob plays first and the two players alternate. 
+
+2.In his/her turn ,a player can subtract from N any prime number(including 1) less than N.The number thus obtained is the new N. 
+
+3.The person who cannot make a move in his/her turn loses the game. 
+
+Assuming both play optimally,who wins the game ?
+Input format:
+
+The first line contains the number of test cases T.Each of the next lines contains an integer N.
+Output format:
+
+Output T lines one for each test case,containing "ALICE" if Alice wins the game ,or "BOB" if Bob wins the game.*/

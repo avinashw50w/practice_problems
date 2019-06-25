@@ -1,0 +1,68 @@
+git config --list : list the current configuration
+git config --global http.proxy proxy:port   : set the http proxy with proxyname - proxy and port as 'port'
+git config --global get http.proxy : display the current http proxy
+git config --global unset http.proxy : unset the http proxy
+
+git init : initialize the github repository
+git checkout filename : creates a new file in the repo
+git status : shows the status of the files in the repo, whether there are any untracked files, modifications, commits requred etc.
+git log : shows commit history
+git add filename : add the file 'filename' to the staging area
+git add *.html : add all .html files to the staging area
+git add . : add all files in the repo to the staging area
+git commit -m "your message" : commits the files in the staging area
+git remote add <repo_alias> <repo_url>
+git push remote origin "URL of the github repo" : sets the alias name of the remote github repo to 'origin'
+git push filename origin master : push the filename to master branch of remove github repo
+git push origin master : pushes all the files of the origin repo to remote master branch
+git branch branchname : creates a branch with name as 'branchname'
+git checkout  branchname :move to branch 'branchname'
+git branch -d branchname : deletes the local branch named 'branchname'
+git branch : lists all the branches
+git push origin --delete <branch_name> : delete the remote branch named 'branch_name'
+git diff : shows the changes made 
+git reset HEAD filename : remove the fileame from the staging area
+git checkout filename : creates a file named 'filename'
+git checkout <commit_id> -- filename : replaces the file 'filename' with the file with commit id as'commit_id'
+git mv filename1 filename2 : rename filename1 to filename2
+
+
+To undo your (uncommitted) changes in a-file.txt:
+
+git checkout a-file.txt
+If you have committed changes and want to undo them back to a certain previous commit:
+
+git checkout [some-older-commit-ref] a-file.txt
+
+git checkout <fileName> : undo changes to files in the local which are not staged yet
+
+Stashing
+============
+
+Often, when you’ve been working on part of your project, things are in a messy state and you want to switch branches for a bit to work on something else. 
+The problem is, you don’t want to do a commit of half-done work just so you can get back to this point later. The answer to this issue is the git stash command.
+
+$ git stash
+Saved working directory and index state \
+  "WIP on master: 049d078 added the index file"
+HEAD is now at 049d078 added the index file
+(To restore them type "git stash apply")
+
+$ git stash list
+stash@{0}: WIP on master: 049d078 added the index file
+stash@{1}: WIP on master: c264051 Revert "added file_size"
+stash@{2}: WIP on master: 21d80a5 added number to log
+
+ You can reapply the one you just stashed by using the command shown in the help output of the original stash command: git stash apply. 
+ If you want to apply one of the older stashes, you can specify it by naming it, like this: git stash apply stash@{2}. 
+ If you don’t specify a stash, Git assumes the most recent stash and tries to apply it:
+ 
+ The changes to your files were reapplied, but the file you staged before wasn’t restaged. To do that, you must run the git stash apply 
+ command with a --index option to tell the command to try to reapply the staged changes. 
+ 
+ 
+ // to pull remote changes overwriting the local changes
+ - git fetch --all only fetches remote changes from all branches to local repository and it does not affect working directory.
+ - git pull
+ 
+ git reset --hard origin/master - will remove all uncommitted changes from your working directory.

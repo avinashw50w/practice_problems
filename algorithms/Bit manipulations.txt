@@ -1,0 +1,16 @@
+x<<n  : x*pow(2,n)
+
+1<<n  : pow(2,n)
+
+a&1   : equals 1 if a is odd  else 0 if even  ie, if(a&1)  then a is odd;else a is even;
+
+set nth bit : j=j| (1<<n)
+
+unset nth bit : j=j &~(1<<n)
+
+check if nth bit is set: j&(1<<n)
+
+check power of 2 : if(!(x&(x-1)) ) then x is a power of 2
+
+
+

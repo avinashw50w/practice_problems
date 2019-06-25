@@ -1,0 +1,368 @@
+Integer Limits:
+Constant	Meaning							Value
+USHRT_MAX	Maximum value for a variable of type unsigned short.	65535 (0xffff)
+INT_MIN	Minimum value for a variable of type int.	                –2147483648
+INT_MAX	Maximum value for a variable of type int.			 2147483647
+UINT_MAX	Maximum value for a variable of type unsigned int.	4294967295 (0xffffffff)
+
+-----------------------------------------------------------------------------------------------
+1.memset(arr,n,sizeof(arr))          //initialize the array arr with value n
+ex. memset(
+------------------------------------------------------------------------------------------------
+2.fread :
+
+This Function is Used in Binary Mode.
+Function Reads Block of Data from Binary Mode File and Assign it to the Region of Memory Specified.
+[i.e Reads Block of Data From Binary File and Assign it to Some Memory ]
+Returns : Total number of Values Read.
+Syntax: int fread(void *Buffer,int Size,int Count,FILE *ptr);
+
+ex. FILE *fp;
+   int buffer[100];float x;
+    /* Open file for both reading and writing */
+   fp = fopen("file.txt", "w+");
+	fread(buffer,sizeof(int),100,fp);
+	fread(&x,sizeof(x),1,fp);
+-----------------------------------------------------------------------------------------------------
+3.fwrite :
+
+This Function is Used in Binary Mode.
+Function Writes Block of Data to Binary Mode File.[i.e Writes Block to Binary File]
+
+Syntax: int fwrite(void *Buffer,int Size,int Count,FILE *ptr);  
+Parameters :
+“Buffer” is Variable of Pointer Type.
+“Buffer” Holds Starting Address of the Block to be Written on File.
+Size Specifies the Size in Bytes of Individual Data Item.
+Count Specifies “Number of Items to Be Written Onto File“.
+
+ex.
+struct student
+{
+   char name[50];
+   int roll;
+};
+main()
+{
+FILE *fptr;
+struct student st[20];
+int num;
+if((fptr = fopen("ip.txt","wb+"))==NULL)
+  {
+  printf("nError in Opening File");
+  exit(0);
+  } 
+printf("How many Students : ");
+scanf("%d",&num);
+
+for(i=0;i<num;i++)
+  {
+  printf("nEnter the Name and Roll Number");
+  scnaf("%s %d",st.name,&st.roll);
+  fwrite(&st,sizeof(st),1,fptr);
+  }
+//Structure is Written on File
+getch();
+}
+
+---------------------------------------------------------------------
+#include<cstdio>
+
+Functions
+Operations on files:
+remove
+Remove file (function )
+rename
+Rename file (function )
+tmpfile
+Open a temporary file (function )
+tmpnam
+Generate temporary filename (function )
+
+File access:
+fclose
+Close file (function )
+fflush
+Flush stream (function )
+fopen
+Open file (function )
+freopen
+Reopen stream with different file or mode (function )
+setbuf
+Set stream buffer (function )
+setvbuf
+Change stream buffering (function )
+
+Formatted input/output:
+fprintf
+Write formatted data to stream (function )
+fscanf
+Read formatted data from stream (function )
+printf
+Print formatted data to stdout (function )
+scanf
+Read formatted data from stdin (function )
+snprintf 
+Write formatted output to sized buffer (function )
+sprintf
+Write formatted data to string (function )
+sscanf
+Read formatted data from string (function )
+vfprintf
+Write formatted data from variable argument list to stream (function )
+vfscanf 
+Read formatted data from stream into variable argument list (function )
+vprintf
+Print formatted data from variable argument list to stdout (function )
+vscanf 
+Read formatted data into variable argument list (function )
+vsnprintf 
+Write formatted data from variable argument list to sized buffer (function )
+vsprintf
+Write formatted data from variable argument list to string (function )
+vsscanf 
+Read formatted data from string into variable argument list (function )
+
+Character input/output:
+fgetc - Get character from stream (function )
+fgets - Get string from stream (function )
+fputc - Write character to stream (function )
+fputs - Write string to stream (function )
+getc - Get character from stream (function )
+putc - Write character to stream (function )
+ungetc - Unget character from stream (function )
+
+getchar - Get character from stdin (function )
+gets - Get string from stdin (function )
+putchar - Write character to stdout (function )
+puts - Write string to stdout (function )
+
+Direct input/output:
+fread - Read block of data from stream (function )
+fwrite - Write block of data to stream (function )
+
+File positioning:
+fgetpos - Get current position in stream (function )
+fseek - Reposition stream position indicator (function )
+fsetpos - Set position indicator of stream (function )
+ftell -Get current position in stream (function )
+rewind - Set position of stream to the beginning (function )
+
+Error-handling:
+clearerr - Clear error indicators (function )
+feof - Check end-of-file indicator (function )
+ferror - Check error indicator (function )
+perror - Print error message (function )
+
+/* fflush example */
+#include <stdio.h>
+char mybuffer[80];
+int main()
+{
+   FILE * pFile;
+   pFile = fopen ("example.txt","r+");
+   if (pFile == NULL) perror ("Error opening file");
+   else {
+     fputs ("test",pFile);
+     fflush (pFile);    // flushing or repositioning required
+     fgets (mybuffer,80,pFile);
+     puts (mybuffer);
+     fclose (pFile);
+     return 0;
+  }
+}
+------------------------------------------------------
+/* freopen example: redirecting stdout */
+#include <stdio.h>
+                      // This sample code redirects the output that would normally go to the standard output 
+int main ()            // to a file called myfile.txt
+{
+  freopen ("myfile.txt","w",stdout);
+  printf ("This sentence is redirected to a file.");
+  fclose (stdout);
+  return 0;
+}
+--------------------------------------------------------------------
+/* fscanf example */
+#include <stdio.h>
+
+int main ()
+{
+  char str [80];
+  float f;
+  FILE * pFile;
+
+  pFile = fopen ("myfile.txt","w+");
+  fprintf (pFile, "%f %s", 3.1416, "PI");
+  rewind (pFile);
+  fscanf (pFile, "%f", &f);
+  fscanf (pFile, "%s", str);
+  fclose (pFile);
+  printf ("I have read: %f and %s \n",f,str);
+  return 0;
+}
+-------------------------------------------------------------------
+/* getc example: money counter */
+#include <stdio.h>
+int main ()
+{
+  FILE * pFile;
+  int c;
+  int n = 0;
+  pFile=fopen ("myfile.txt","r");
+  if (pFile==NULL) perror ("Error opening file");
+  else
+  {
+    do {
+      c = getc (pFile);
+      if (c == '$') n++;
+    } while (c != EOF);
+    fclose (pFile);
+    printf ("File contains %d$.\n",n);
+  }
+  return 0;
+}
+------------------------------------------------------------------------
+/* putc example: alphabet writer */
+#include <stdio.h>
+
+int main ()
+{
+  FILE * pFile;
+  char c;
+
+  pFile=fopen("alphabet.txt","wt");
+  for (c = 'A' ; c <= 'Z' ; c++) {
+    putc (c , pFile);
+    }
+  fclose (pFile);
+  return 0;
+}
+----------------------------------------------------------------------
+/* fgets example */
+#include <stdio.h>
+
+int main()
+{
+   FILE * pFile;
+   char mystring [100];
+
+   pFile = fopen ("myfile.txt" , "r");
+   if (pFile == NULL) perror ("Error opening file");
+   else {
+     if ( fgets (mystring , 100 , pFile) != NULL )
+       puts (mystring);
+     fclose (pFile);
+   }
+   return 0;
+}
+------------------------------------------------------------------------
+/* fputs example */
+#include <stdio.h>
+
+int main ()
+{
+   FILE * pFile;
+   char sentence [256];
+
+   printf ("Enter sentence to append: ");
+   fgets (sentence,256,stdin);
+   pFile = fopen ("mylog.txt","a");
+   fputs (sentence,pFile);
+   fclose (pFile);
+   return 0;
+}
+----------------------------------------------------------------------
+
+Deque:
+
+#include<deque>
+std::deque<int> mydeque;            // empty deque named 'mydeque' that stores integer values
+std::deque<int> mydeque(k);         // deque of size k ,initially initialised as zero
+std::deque<int> mydeque(k,n);       // create a deque of k elements each with the value n
+std::deque<int>::iterator i;        // declare an iterator i of the deque
+i=mydeque.begin();                  // set the value of the iterator to the beginning of the deque
+mydeque.end();                      //return the end position of the deque
+mydeque.front();                    //return the value of the front element  ie, in (1,2,3,4) it returns 1
+mydeque.back();                     //return the value of the last element   ie, in (1,2,3,4) it returns 4
+mydeque.insert(i,n);                  //insert element of value n at the front of position i in the deck
+mydeque.push_front(n);              //push value n in the front
+mydeque.push_back(n);               //push value n in the rear
+mydeque.pop_front();              //pop the element from the front
+mydeque.pop_back();               //pop the element from the rear
+mydeque.erase(i);                  // erase the ith element
+mydeque.assign();                  //assign value to the deque
+mydeque.empty();                    //return true if the deque is empty
+mydeque.size();                     //return the total no of elements in the deque
+mydeque.max_size();               //return the maximum number of elements a deque container can hold as content.
+mydeque.resize(n);                 //reizises the deque to size n
+--------------------------------------------------------
+std::cout << "Enter number of elements: ";
+  std::cin >> i;
+
+  if (i<mydeque.max_size()) mydeque.resize(i);
+  else std::cout << "That size exceeds the limit.\n";
+
+----------------------------------------------------------------
+ std::deque<int>::iterator it = mydeque.begin();
+
+  while (it != mydeque.end())
+    std::cout << ' ' << *it++;
+-----------------------------------------------------------------
+// set some values (from 1 to 10)
+  for (int i=1; i<=10; i++) mydeque.push_back(i);
+
+  // erase the 6th element
+  mydeque.erase (mydeque.begin()+5);
+
+  // erase the first 3 elements:
+  mydeque.erase (mydeque.begin(),mydeque.begin()+3);
+----------------------------------------------------------------------
+std::deque<int> first;
+  std::deque<int> second;
+  std::deque<int> third;
+
+  first.assign (7,100);             // 7 ints with a value of 100
+
+  std::deque<int>::iterator it;
+  it=first.begin()+1;
+
+  second.assign (it,first.end()-1); // the 5 central values of first
+
+  int myints[] = {1776,7,4};
+  third.assign (myints,myints+3);   // assigning from array.
+
+  std::cout << "Size of first: " << int (first.size()) << '\n';
+  std::cout << "Size of second: " << int (second.size()) << '\n';
+  std::cout << "Size of third: " << int (third.size()) << '\n';
+
+output:
+Size of first: 7
+Size of second: 5
+Size of third: 3
+-----------------------------------------------------------------------
+unsigned int i;
+  std::deque<int> mydeque;
+  mydeque.push_back (100);
+  mydeque.push_back (200);
+  mydeque.push_back (300);
+
+  std::cout << "mydeque contains:";
+  for (std::deque<int>::iterator it = mydeque.begin(); it!=mydeque.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+
+  mydeque.clear();
+  mydeque.push_back (1101);
+  mydeque.push_back (2202);
+
+  std::cout << "mydeque contains:";
+  for (std::deque<int>::iterator it = mydeque.begin(); it!=mydeque.end(); ++it)
+    std::cout << ' ' << *it;
+  std::cout << '\n';
+
+output:
+mydeque contains: 100 200 300
+mydeque contains: 1101 2202
+
+

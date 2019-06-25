@@ -1,0 +1,56 @@
+x<<n  : x*pow(2,n)
+
+1<<n  : pow(2,n)
+
+x>>n  : x/pow(2,n)
+
+a&1   : equals 1 if a is odd  else 0 if even  ie, if(a&1)  then a is odd;else a is even;
+
+set nth bit : j=j| (1<<n)
+
+unset nth bit : j=j &~(1<<n)
+
+check if nth bit is set: j&(1<<n)
+
+check power of 2 : if(!(x&(x-1)) ) then x is a power of 2
+
+next power of 2 less than n:  
+nextpow(int n){ 
+int x=0;
+while(n>2){ x++; n>>=1;}
+return 1<<x;  }
+
+A few distributive properties of modulo are as follows:
+1. ( a + b ) % c = ( ( a % c ) + ( b % c ) ) % c
+2. ( a * b ) % c = ( ( a % c ) * ( b % c ) ) % c   (important)
+3. ( a – b ) % c = ( ( a % c ) - ( b % c ) ) % c ( see notes at bottom )
+4. ( a / b ) % c NOT EQUAL TO ( ( a % c ) / ( b % c ) ) % c
+So, modulo is distributive over +, * and - but not / .
+
+One observation that I’d like to make here is that the result of ( a % b ) will always be less than b.
+( a * b * c ) % M is the same as ( ( ( a * b ) % M ) * c ) % M
+
+ The modulo multiplicative inverse ( MMI ) of a number y is z iff (z * y) % M == 1.  here 1<= z <= M-1
+
+For M to be a prime number is really important. Because if it is not a prime number then it is possible that the result of a modulo 
+operation may become 0. Eg. if M=12 and we perform ( 8 * 3 ) % 12, we'll get 0. But if M is prime then ( ( a % M ) * ( b % M ) ) % M 
+can never be 0 (unless a or b == 0)
+If M is prime then we can find MMI for any number n such that 1<=n<M
+( a – b ) % c = ( ( a % c ) - ( b % c ) ) %c is fine mathematically. But, while programming, don't use
+
+a=(a%c);
+b=(b%c);
+ans=( a - b )%c;
+
+instead use
+
+a=a%c;
+b=b%c;
+ans = ( a - b + c ) % c;
+
+% works differently with -ve numbers
+
+Cool fact: if factorization of N is p1q1 * p2q2 * ... * pkqk then N has (q1 + 1) * (q2 + 1) * ... * (qk + 1) distinct divisors.
+
+
+
