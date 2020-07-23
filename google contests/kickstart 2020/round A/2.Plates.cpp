@@ -18,7 +18,7 @@ int a[51][31];
 void solve() {
     int n, k, p;
     cin >> n >> k >> p;
-    vector<int> dp(p+1, 0); // dp[i] - maximum beauty value if no of plates taken are i
+    vector<int> dp(p + 1, 0); // dp[i] - maximum beauty value if no of plates taken are i
 
     for (int i = 0; i < n; ++i) {
         vector<int> ndp = dp;
@@ -26,8 +26,8 @@ void solve() {
             cin >> a[i][j];
             sum += a[i][j];
             // use j+1 plates
-            for (int l = 0; l+j+1 <= p; ++l) {
-                ndp[l+j+1] = max(ndp[l+j+1], dp[l] + sum);
+            for (int l = 0; l + j + 1 <= p; ++l) {
+                ndp[l + j + 1] = max(ndp[l + j + 1], dp[l] + sum);
             }
         }
 
@@ -59,22 +59,22 @@ const int K = 35;
 
 int n, k, p;
 int a[N][K];
-int cache[N][N * K];
+int dp[N][N * K];
 
 int dp(int idx, int taken)
 {
-    if(taken == 0)
+    if (taken == 0)
         return 0;
-    if(taken < 0)
+    if (taken < 0)
         return -2e9;
-    if(idx > n)
+    if (idx > n)
         return 0;
-    int &ans = cache[idx][taken];
-    if(ans != -1)
+    int &ans = dp[idx][taken];
+    if (ans != -1)
         return ans;
     ans = 0;
     int val = 0;
-    for(int i = 0; i <= k; i++)
+    for (int i = 0; i <= k; i++)
     {
         val += a[idx][i];
         ans = max(ans, val + dp(idx + 1, taken - i));
@@ -87,17 +87,17 @@ int32_t main()
     IOS;
     int t;
     cin >> t;
-    int tc = 0; 
-    while(t--)
+    int tc = 0;
+    while (t--)
     {
-        memset(cache, -1, sizeof(cache));
+        memset(dp, -1, sizeof(dp));
         tc++;
         cin >> n >> k >> p;
-        for(int i = 1; i <= n; i++)
-            for(int j = 1; j <= k; j++)
+        for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= k; j++)
                 cin >> a[i][j];
         int ans = dp(1, p);
         cout << "Case #" << tc << ": " << ans << endl;
-    }   
+    }
     return 0;
 }
