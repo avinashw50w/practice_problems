@@ -30,41 +30,49 @@ Day 7: [0, 0, 1, 1, 0, 0, 0, 0]
 Example 2:
 
 Input: cells = [1,0,0,1,0,0,1,0], N = 1000000000
-Output: [0,0,1,1,1,1,1,0] */
+Output: [0,0,1,1,1,1,1,0]
+
+explanation: the cell configuration is going to repeat itself after some days, coz only a total of
+2^8 possible configuration of cells is possible.*/
 
 class Solution {
 public:
+    vector<int> nextCell(vector<int> v) {
+        vector<int> tmp(v.size());
+        for (int i = 1; i < v.size() - 1; ++i)
+            tmp[i] = v[i - 1] == v[i + 1] ? 1 : 0;
+
+        return tmp;
+    }
+
     vector<int> prisonAfterNDays(vector<int>& cells, int N) {
-        map<vector<int>, int> mp;
-        int cnt = 0;
+        set<vector<int> > st;
+
+        int cnt = 0, found = false;
 
         for (int i = 0; i < N; ++i) {
-            cells = nextRow(cells);
+            vector<int> next = nextCell(cells);
 
-            if (mp.count(cells)) {
+            if (!st.count(next)) {
+                cnt++;
+                st.insert(next);
+            }
+            else {
+                found = true;
                 break;
             }
 
-            mp[cells] = i + 1;
-            cnt++;
+            cells = next;
         }
 
-        N -= mp[cells];
-        N = cnt > 0 ? (N % cnt) : 0;
-
-        for (int i = 0; i < N; ++i)
-            cells = nextRow(cells);
+        if (found) {
+            N %= cnt;
+            for (int i = 0; i < N; ++i) {
+                vector<int> next = nextCell(cells);
+                cells = next;
+            }
+        }
 
         return cells;
-    }
-
-    vector<int> nextRow(vector<int> row) {
-        int n = row.size();
-        vector<int> tmp(n, 0);
-        for (int i = 1; i < n - 1; ++i)
-            if (row[i - 1] == row[i + 1])
-                tmp[i] = 1;
-
-        return tmp;
     }
 };
