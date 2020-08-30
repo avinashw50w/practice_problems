@@ -17,16 +17,35 @@ Output: 5->4->3->2->1->NULL
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode *curr = head, *prev = NULL, *next;
+        ListNode *prev = NULL, *curr = head, *next;
         while (curr) {
             next = curr->next;
             curr->next = prev;
             prev = curr;
             curr = next;
         }
-        
+
         head = prev;
-        
         return head;
     }
 };
+
+/////////////////////////////////////////
+/// Recursive solution
+
+ListNode* reverseList(ListNode* head) {
+    ListNode *prev = NULL, *curr = head;
+    solve(head, prev, curr);
+    return head;
+}
+
+void solve(ListNode *&head, ListNode *prev, ListNode *curr) {
+    if (!curr) {
+        head = prev;
+        return;
+    }
+
+    ListNode *next = curr->next;
+    curr->next = prev;
+    solve(head, curr, next);
+}

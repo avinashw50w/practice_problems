@@ -7,18 +7,13 @@ Output: 6
 Explanation: [4,-1,2,1] has the largest sum = 6.*/
 
 class Solution {
-    typedef long long ll;
 public:
     int maxSubArray(vector<int>& nums) {
-        int n = nums.size();
-        ll prefix = nums[0];
-        ll ans = nums[0];
-        
-        for (int i = 1; i < n; ++i) {
-            prefix = max((ll)nums[i], prefix + nums[i]);
-            ans = max(ans, prefix);
+        int curr = 0, ans = INT_MIN;
+        for (int e : nums) {
+            curr = max(e, curr + e);
+            ans = max(ans, curr);
         }
-        
         return ans;
     }
 };
@@ -34,8 +29,8 @@ public:
         vector<ll> dp(n, -INF);
         dp[0] = nums[0];
         for (int i = 1; i < n; ++i)
-            dp[i] = max((ll)nums[i], nums[i] + dp[i-1]);
-        
+            dp[i] = max((ll)nums[i], nums[i] + dp[i - 1]);
+
         return *max_element(dp.begin(), dp.end());
     }
 };
