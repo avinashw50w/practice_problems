@@ -8,7 +8,9 @@ Example:
     /  \
    15   7
 
-There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.*/
+There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.
+means find the node which is the left child of its parent and also a leaf node.
+*/
 
 class Solution {
 public:

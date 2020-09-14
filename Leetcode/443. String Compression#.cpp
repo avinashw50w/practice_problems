@@ -24,8 +24,8 @@ Explanation:
 
 int compress(vector<char>& a) {
     int n = a.size();
-    int k = 0;
-    for (int i = 0; i < n; ++i) {
+    int i = 0, k = 0;
+    while (i < n) {
         a[k++] = a[i];
         int len = 1;
 
@@ -36,7 +36,7 @@ int compress(vector<char>& a) {
             for (char c : s) a[k++] = c;
         }
 
-        i += len - 1;
+        i += len;
     }
 
     return k;
