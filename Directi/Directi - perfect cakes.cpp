@@ -23,88 +23,65 @@ using namespace std;
 #define per(i,b,a) for(int i=(b);i>=(a);--i)
 #define all(o) (o).begin(),(o).end()
 #define mset(a,o) memset((a),(o),sizeof(a))
+#define BOOST ios_base::sync_with_stdio(0)
 
-int dx[] = {0,1,-1,0,1,1,-1,-1};
-int dy[] = {1,0,0,-1,1,-1,1,-1};
-
-int n, m;
-
-char grid[128][128];
-
-
-
-
-
-bool dfs(char grid[128][128], bool vis[128][128], char s[32], int m, int n, int x, int y, int k) {
-
-	if(k == strlen(s)-1) return true;
-
-	vis[x][y] = 1;
-
-	rep(i,0,8) {
-		
-		int nx = x + dx[i];
-		int ny = y + dy[i];
-
-		if(!(nx>=0 and nx<m and ny>=0 and ny<n)) continue;
-
-		if(vis[nx][ny]) continue;
-
-		if(grid[nx][ny] == s[k+1])
-			if(dfs(grid, vis, s, m, n, nx, ny, k+1)) return true;
-	}
-
-	vis[x][y] = 0;
-
-	return false;
-}
-
-bool solve(char grid[128][128], int m, int n, char s[32]) {
-
-	int flag = 0;
-	bool vis[128][128];
-
-	rep(i,0,m) {
-
-		if(flag == 1) break;
-
-		rep(j,0,n) {
-
-			if(grid[i][j] == s[0]) {
-
-				memset(vis, 0, sizeof(vis));
-
-				if(dfs(grid, vis, s, m, n, i, j, 0)) {
-					
-					flag = 1;
-					break;
-				}
-			}
-		}
-	}
-
-	if(flag) return true;
-
-	else return false;
-}
 
 int main() {
-	
-	cin>>m>>n;
+	int t; cin >> t;
 
-	rep(i,0,m) rep(j,0,n) scanf(" %c", &grid[i][j]);
+	while (t--) {
 
-	int q; cin>>q;
+		int n, m;
+		cin >> n >> m;
 
-	while(q--) {
+		set<int> st[3];
 
-		char s[32]; 
+		while (m--) {
+			vector<int> v;
 
-		scanf(" %s", s);
+			int a; cin >> a;
+			a <<= 1;
 
-		if(solve(grid, m, n, s)) printf("%s: true\n", s);
+			while (a--) {
+				int x; cin >> x;
+				v.push_back(x);
+			}
 
-		else printf("%s: false\n", s);
+			char c; cin >> c;
+
+			if (c == '<') {
+				rep(i, 0, v.size())
+				if (st[1].find(v[i]) == st[1].end()) st[1].insert(v[i]);
+			}
+
+			else if (c == '>') {
+				rep(i, 0, v.size())
+				if (st[2].find(v[i]) == st[2].end()) st[2].insert(v[i]);
+			}
+
+			else if (c == '=')  {
+				rep(i, 0, v.size())
+				if (st[0].find(v[i]) == st[0].end()) st[0].insert(v[i]);
+			}
+
+		}
+
+		int ans = 0;
+		for (set<int>::iterator i = st[0].begin(); i != st[0].end(); ++i) {
+
+			set<int>::iterator it = st[1].find(*i);
+			if (it != st[1].end()) st[1].erase(it);
+
+			it = st[2].find(*i);
+			if (it != st[2].end()) st[2].erase(it);
+		}
+
+		if (st[1].size() == 1) { ans = *st[1].begin(); }
+
+		else if (st[2].size() == 1) { ans = *st[1].begin(); }
+
+		else ans = 0;
+
+		cout << ans << endl;
 	}
-	
 }

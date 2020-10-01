@@ -1,40 +1,40 @@
-/*Given n positive real numbers, find whether there exists a triplet among this set such that, the sum of the triplet is in the range (1, 2). 
+/*Given n positive real numbers, find whether there exists a triplet among this set such that, the sum of the triplet is in the range (1, 2).
 Do it in linear time and O (1) space.
 
-Consider the following buckets: (0..0.5), [0.5..1), [1..2), [2..inf). 
-Obviously, we ignore numbers in [2..inf). 
+Consider the following buckets: (0..0.5), [0.5..1), [1..2), [2..inf).
+Obviously, we ignore numbers in [2..inf).
 
-Now basically we need to treat all cases of choosing 3 numbers from the 3 buckets. 
+Now basically we need to treat all cases of choosing 3 numbers from the 3 buckets.
 
-We only need to look at the following cases (the other cases are "worse" or are covered by these): 
-1. If possible, choose the smallest element from bucket [1..2) => for the 2nd and 3rd we need to take the smallest 2 elements available. 
-If sum < 2 then return true. 
+We only need to look at the following cases (the other cases are "worse" or are covered by these):
+1. If possible, choose the smallest element from bucket [1..2) => for the 2nd and 3rd we need to take the smallest 2 elements available.
+If sum < 2 then return true.
 
-2. If possible, choose the two smallest elements from bucket [0.5 .. 1) => for the 3rd we need to take the smallest element available. 
-If sum < 2 then return true; 
+2. If possible, choose the two smallest elements from bucket [0.5 .. 1) => for the 3rd we need to take the smallest element available.
+If sum < 2 then return true;
 
-3. If possible, choose the highest element from bucket [0.5 .. 1) => if possible, for the 2nd and 3rd take the highest and 
-the second highest from bucket (0 .. 0.5). If sum > 1 then return true. 
+3. If possible, choose the highest element from bucket [0.5 .. 1) => if possible, for the 2nd and 3rd take the highest and
+the second highest from bucket (0 .. 0.5). If sum > 1 then return true.
 
-4. If possible, choose the highest 3 elements from bucket (0..0.5). If sum > 1 then return true. 
+4. If possible, choose the highest 3 elements from bucket (0..0.5). If sum > 1 then return true.
 
-If none of the cases above found a solution then return false. 
+If none of the cases above found a solution then return false.
 
-Space complexity: O(1), you don't need to explicitly store numbers in buckets. 
-Time complexity: each operation (e.g.: find smallest element from bucket [1..2), etc.) can be done in O(N). 
-There is a constant number of these operations => overall complexity O(N) 
+Space complexity: O(1), you don't need to explicitly store numbers in buckets.
+Time complexity: each operation (e.g.: find smallest element from bucket [1..2), etc.) can be done in O(N).
+There is a constant number of these operations => overall complexity O(N)
 
-LATER EDIT: 
+LATER EDIT:
 
-Since the answer was down-graded without any question or explanation why it would be wrong, here is the 
-actual code and the associated tests. Hopefully I didn't forget any relevant test case. 
+Since the answer was down-graded without any question or explanation why it would be wrong, here is the
+actual code and the associated tests. Hopefully I didn't forget any relevant test case.
 
-The code could be optimized more and be more condensed, but I tried to make it as clear as possible 
+The code could be optimized more and be more condensed, but I tried to make it as clear as possible
 (regarding to the explanations above and the space and time requirements).*/
 
 const float INF = 1000;
 
-bool inInterval(float x, float st, float end) { return x >= st && x < end; }
+bool inInterval(float x, float st, float end) { return st <= x && x < end; }
 
 bool findFirstSmallest(const vector<float>& a, float start, float end, float &res) {
     int found = 0;
@@ -147,27 +147,27 @@ bool findThirdHighest(const vector<float>& a, float start, float end, float &res
 }
 
 bool solve(const vector<float>& a, float& x, float &y, float& z) {
-   if (findFirstSmallest(a, 1, 2, x) && 
-       findFirstSmallest(a, 0, 1, y) &&
-       findSecondSmallest(a, 0, 1, z))
+    if (findFirstSmallest(a, 1, 2, x) &&
+            findFirstSmallest(a, 0, 1, y) &&
+            findSecondSmallest(a, 0, 1, z))
         if (x + y + z < 2) return true;
 
-   if (findFirstSmallest(a, 0.5, 1, x) &&
-       findSecondSmallest(a, 0.5, 1, y) &&
-       (findFirstSmallest(a, 0, 0.5, z) || findThirdSmallest(a, 0.5, 1, z) ))
+    if (findFirstSmallest(a, 0.5, 1, x) &&
+            findSecondSmallest(a, 0.5, 1, y) &&
+            (findFirstSmallest(a, 0, 0.5, z) || findThirdSmallest(a, 0.5, 1, z) ))
         if (x + y + z < 2) return true;
 
-   if (findFirstSmallest(a, 0.5, 1, x) &&
-       findFirstHighest(a, 0, 0.5, y) &&
-       findSecondHighest(a, 0, 0.5, z))
+    if (findFirstSmallest(a, 0.5, 1, x) &&
+            findFirstHighest(a, 0, 0.5, y) &&
+            findSecondHighest(a, 0, 0.5, z))
         if (x + y + z >= 1) return true;
 
-   if (findFirstHighest(a, 0, 0.5, x) &&
-       findSecondHighest(a, 0, 0.5, y) &&
-       findThirdHighest(a, 0, 0.5, z))
+    if (findFirstHighest(a, 0, 0.5, x) &&
+            findSecondHighest(a, 0, 0.5, y) &&
+            findThirdHighest(a, 0, 0.5, z))
         if (x + y + z >= 1) return true;
 
-   return false;
+    return false;
 }
 
 void test(const vector<float>& a) {

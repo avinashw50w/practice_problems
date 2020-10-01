@@ -24,71 +24,82 @@ using namespace std;
 #define all(o) (o).begin(),(o).end()
 #define mset(a,o) memset((a),(o),sizeof(a))
 
-int dx[] = {1,0,-1,0};
-int dy[] = {0,1,0,-1};
+int dx[] = {0, 1, -1, 0, 1, 1, -1, -1};
+int dy[] = {1, 0, 0, -1, 1, -1, 1, -1};
 
-int M,N,X,Y,D;
+int n, m;
 
-int H[101][101], vis[101][101], dist[101][101];
+char grid[128][128];
+bool vis[128][128];
+char s[32];
 
-bool safe(int a, int b, int x, int y) {
-	return (x>=1 and x<=M and y>=1 and y<=N and abs(H[a][b] - H[x][y]) <= D);
+bool dfs(int x, int y, int k) {
+
+	if (k == strlen(s) - 1) return true;
+
+	vis[x][y] = 1;
+
+	rep(i, 0, 8) {
+
+		int nx = x + dx[i];
+		int ny = y + dy[i];
+
+		if (!(nx >= 0 and nx<m and ny >= 0 and ny < n)) continue;
+
+		if (vis[nx][ny]) continue;
+
+		if (grid[nx][ny] == s[k + 1])
+			if (dfs(nx, ny, k + 1)) return true;
+	}
+
+	vis[x][y] = 0;
+
+	return false;
 }
 
-void solve() {
+bool solve() {
 
-	memset(dist, 0, sizeof(dist));
-	memset(vis, 0, sizeof(vis));
+	int flag = 0;
 
-	queue<pair<int,int>> Q;
+	rep(i, 0, m) {
 
-	Q.push(make_pair(1,1));
-	
-	dist[1][1] = 0;
-	vis[1][1] = 1;
+		if (flag == 1) break;
 
-	while(!Q.empty()){
+		rep(j, 0, n) {
 
-		auto u = Q.front(); 
+			if (grid[i][j] == s[0]) {
 
-		int x = u.first;
-		int y = u.second;
+				memset(vis, 0, sizeof(vis));
 
-		Q.pop();
+				if (dfs(grid, vis, s, m, n, i, j, 0)) {
 
-		rep(i,0,4) {
-			
-			int nx = x+dx[i];
-			int ny = y+dy[i];
-
-			if(!safe(x, y, nx, ny)) continue;
-
-			if(vis[nx][ny]) continue;
-
-			vis[nx][ny] = 1;
-
-			dist[nx][ny] = dist[x][y] + 1;
-			
-			if(nx == X and ny == Y) break;
-
-			Q.push(make_pair(nx, ny));
+					flag = 1;
+					break;
+				}
+			}
 		}
 	}
 
-	cout << dist[X][Y]-1 << endl;
+	if (flag) return true;
+
+	else return false;
 }
 
-
-
 int main() {
-	int t; cin>>t;
 
-	while(t--) {
+	cin >> m >> n;
 
-		cin>>M>>N>>X>>Y>>D;
+	rep(i, 0, m) rep(j, 0, n) scanf(" %c", &grid[i][j]);
 
-		rep(i,1,M+1) rep(j,1,N+1) cin>>H[i][j];
+	int q; cin >> q;
 
-		solve();
+	while (q--) {
+
+		scanf(" %s", s);
+
+		if (solve(grid, m, n, s)) printf("%s: true\n", s);
+
+		else printf("%s: false\n", s);
 	}
+
 }
