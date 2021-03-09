@@ -27,8 +27,8 @@ int main() {
     for (int i = 0; i < H; ++i) {
         for (int j = 0; j < W; ++j) {
             if (grid[i][j] == '.') {
-                if (i-1 >= 0) add_self(dp[i][j], dp[i-1][j]);
-                if (j-1 >= 0) add_self(dp[i][j], dp[i][j-1]);
+                if (i) add_self(dp[i][j], dp[i-1][j]);
+                if (j) add_self(dp[i][j], dp[i][j-1]);
             }
         }
     }

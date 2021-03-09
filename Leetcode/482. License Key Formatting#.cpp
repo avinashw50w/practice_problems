@@ -18,22 +18,20 @@ Note that the two extra dashes are not needed and can be removed.*/
 class Solution {
 public:
     string licenseKeyFormatting(string S, int K) {
-        int n = S.size();
-        int cnt = 0;
+        int n = S.size(), j = 0, cnt = 0;
         string ans = "";
-
         for (int i = n - 1; i >= 0; --i) {
             if (S[i] != '-') {
-                ans += (char) toupper(S[i]);
-                if ((ans.size() - cnt) % K == 0) {
-                    cnt++;
+                if (cnt and cnt % K == 0) {
                     ans += '-';
                 }
+
+                ans += (char) toupper(S[i]);
+                cnt++;
             }
         }
 
         reverse(ans.begin(), ans.end());
-        if (ans[0] == '-') ans.erase(ans.begin());
 
         return ans;
     }

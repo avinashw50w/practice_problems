@@ -11,7 +11,11 @@ Output:
 2
 
 Explanation:
-The two boomerangs are [[1,0],[0,0],[2,0]] and [[1,0],[2,0],[0,0]]*/
+The two boomerangs are [[1,0],[0,0],[2,0]] and [[1,0],[2,0],[0,0]]
+
+IDEA: for every point i, store the no of points equidistant from i,
+then choose any two ordered pairs nP2
+*/
 
 class Solution {
 public:

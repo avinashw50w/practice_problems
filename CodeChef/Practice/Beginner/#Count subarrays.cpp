@@ -43,35 +43,49 @@ Note that singleton subarrays are identically non-decreasing. */
 #define ll long long int
 #define gc getchar()
 using namespace std;
-inline ll input(){
+inline ll input() {
 	int n = 0;
 	register int c = gc;
-	while(c==' '||c=='\n') c=gc;
-	while(c>='0' && c<='9') {
-		n = (n<<3)+(n<<1)+c-48;
-		c=gc;
+	while (c == ' ' || c == '\n') c = gc;
+	while (c >= '0' && c <= '9') {
+		n = (n << 3) + (n << 1) + c - 48;
+		c = gc;
 	}
 	return n;
 }
 
-int main(){
-	int t=input();
-	while(t--){
-		int n=input();
-		ll cnt = 1,ans = 0;
+int main() {
+	int t = input();
+	while (t--) {
+		int n = input();
+		ll cnt = 1, ans = 0;
 		int prev = input();
 		int curr;
-		for(int i=1;i<n;i++) {
+		for (int i = 1; i < n; i++) {
 			curr = input();
-			if(curr>=prev) cnt++;
-			else{
-				ans += (cnt*(cnt+1))/2;
+			if (curr >= prev) cnt++;
+			else {
+				ans += (cnt * (cnt + 1)) / 2;
 				cnt = 1;
 			}
 			prev = curr;
 		}
-		ans += (cnt*(cnt+1))/2;
-		cout << ans <<endl;
+		ans += (cnt * (cnt + 1)) / 2;
+		cout << ans << endl;
 	}
 	return 0;
 }
+
+/////////////////////////////
+// another variation
+int n = input();
+ll cnt = 1, ans = 0;
+int prev = input();
+int curr;
+for (int i = 1; i < n; i++) {
+	curr = input();
+	if (curr >= prev) ans += cnt, cnt++;
+	else cnt = 1;
+	prev = curr;
+}
+cout << ans << endl;

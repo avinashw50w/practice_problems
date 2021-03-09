@@ -1,7 +1,7 @@
 /*Watson and Sherlock are gym buddies.
 
 Their gym trainer has given them three numbers, A, B, and N, and has asked Watson and Sherlock to pick two different positive integers i and j, where i and j are 
-both less than or equal to N. Watson is expected to eat exactly iA sprouts every day, and Sherlock is expected to eat exactly jB sprouts every day.
+both less than or equal to N. Watson is expected to eat exactly i^A sprouts every day, and Sherlock is expected to eat exactly j^B sprouts every day.
 
 Watson and Sherlock have noticed that if the total number of sprouts eaten by them on a given day is divisible by a certain integer K, then they get along well 
 that day.
@@ -48,73 +48,71 @@ Case #3: 0
 
 In Case 1, the possible pairs are (1, 2), (1, 5), (2, 1), (2, 4), (4, 2), (4, 5), (5, 1), and (5, 4).
 In Case 2, the possible pairs are (1, 2), (1, 3), and (4, 1).
-In Case 3, No possible pairs are there, as i != j.*/
+In Case 3, No possible pairs are there, as i != j.
+
+IDEA: we have to find the # of pairs (i, j) 1 <= i, j <= N such that (i^A + j^B) mod K = 0
+
+*/
 
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
  
-#define sd(mark) scanf("%d",&mark)
-#define ss(mark) scanf("%s",&mark)
-#define sl(mark) scanf("%lld",&mark)
-#define debug(mark) printf("check%d\n",mark)
-#define clr(mark) memset(mark,0,sizeof(mark))
-#define F first
-#define S second
-#define MP make_pair
-#define PB push_back
-#define ll long long
-#define N 100010
-#define MOD 1000000007
-
-ll cnt[N];
-vector<int> v[N];
-ll mod;
-
-ll pow1(ll a,ll b)
-{
-	if(b==0)	return 1%mod;
-	ll ret=pow1(a,b/2);
-	ret=(ret*ret)%mod;
-	if(b&1)	ret=(a*ret)%mod;
-	return ret;
+const int MAXK = 1e5;
+const ll MOD = 1e9 + 7;
+ll i_A[MAXK+1], j_B[MAXK+1], i_j_same[MAXK+1];
+ 
+int pow_mod(int a, int n, int mod){
+    int r = 1 % mod;
+    while (n) {
+        if (n&1)
+            r = (ll)r*a%mod;
+        a = (ll)a*a%mod;
+        n >>= 1;
+    }
+ 
+    return r;
 }
-int main()
-{
-	// freopen("B1.in","r",stdin);
-	// freopen("B1.out","w",stdout);
-	int t;
-	sd(t);
-	for(int tt=1;tt<=t;++tt)
-	{
-		ll a,b,n,k,i,j;
-		sl(a);sl(b);sl(n);sl(k);
-		clr(cnt);
-		for(i=0;i<k;++i)
-			v[i].clear();
-		mod=k;
-		for(i=0;i<k;++i)
-			cnt[i]=n/k;
-		ll low=k*(n/k);
-		for(i=low+1;i<=n;++i)
-			cnt[i%k]++;
-		for(i=0;i<k;++i)
-			cnt[i]%=MOD;
-		for(i=0;i<k;++i)
-			v[pow1(i,b)].PB(i);
-		ll ans=0;
-		for(i=0;i<k;++i)
-		{
-			int Left=(k-pow1(i,a))%k;
-			for(j=0;j<v[Left].size();++j)
-			{
-				if(v[Left][j]!=i)
-					ans=(ans+cnt[i]*cnt[v[Left][j]]%MOD)%MOD;
-				else
-					ans=(ans+cnt[i]*(cnt[i]-1+MOD)%MOD)%MOD;
-			}
-		}
-		printf("Case #%d: %lld\n",tt,ans);
-	}
+
+int main() {
+ 
+    int T;
+    int A, B;
+    ll N, K;
+ 
+    cin >> T;
+    for (int i = 1; i <= T; i++)
+    {
+        memset(i_A, 0, sizeof(i_A));
+        memset(j_B, 0, sizeof(j_B));
+        memset(i_j_same, 0, sizeof(i_j_same));
+ 
+        cin >> A >> B >> N >> K;
+        ll res = 0;
+ 
+        for (int p = 1; p <= min(N, K); p++)
+        {
+            ll cnt = ((N - p) / K + 1) % MOD;
+            int tmp_A = pow_mod(p, A, K), tmp_B = pow_mod(p, B, K);
+            i_A[tmp_A] += cnt;
+            j_B[tmp_B] += cnt;
+            if ((tmp_A + tmp_B) % K == 0) // (0 + 0) != K, but (0 + 0) % K == 0
+                i_j_same[p%K] += cnt;
+        }
+ 
+        for (int p = 0; p < K; p++)
+        {
+            int q = (K - p) % K; // Convert (0, K) to (0, 0)
+            res += ((i_A[p] % MOD) * (j_B[q] % MOD)) % MOD;
+            res -= i_j_same[p];
+            res %= MOD;
+        }
+ 
+        res += MOD;
+        res %= MOD;
+ 
+        cout << "Case #" << i << ": " << res << endl;
+    }
 }
 //////////////////////////////////////////////////////////////////////////
 

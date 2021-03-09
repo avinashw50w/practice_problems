@@ -1,3 +1,6 @@
+/* N coins are tossed, and the probability of getting a head in the ith toss is pi.
+Find the probability of getting more heads than tails after tossing all the N coins*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -8,18 +11,18 @@ int main() {
     vector<double> p(N);
 
     // dp[i] : probability of getting i heads so far
-    vector<double> dp(N+1);
+    vector<double> dp(N + 1);
     dp[0] = 1;
     double p_heads;
 
-    for (int coins = 0; coins < N; ++coins) {
+    for (int tosses = 1; tosses <= N; ++tosses) {
         scanf("%lf", &p_heads);
-        for (int i = coins + 1; i >= 0; --i) {
-            /*prob of getting i heads when no of coins are (coins+1) =
-                prob of getting i-1 heads * prob of getting head +
-                prob of getting i heads when no of coins are (coins) * prob of getting tail
+        for (int heads = tosses; heads >= 0; --heads) {
+            /*prob of getting i heads in n tosses =
+                prob of getting i-1 heads in n-1 tosses * prob of getting head in the nth toss +
+                prob of getting i heads in n-1 tosses * prob of getting tail in the nth toss
              */
-            dp[i] = dp[i-1] * p_heads + dp[i] * (1 - p_heads);
+            dp[heads] = dp[heads - 1] * p_heads + dp[heads] * (1 - p_heads);
         }
     }
 

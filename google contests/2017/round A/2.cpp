@@ -74,7 +74,10 @@ In case 2, the island looks like this after the rain:
 5 5 5 1
 5 2 2 5
 5 2 5 5
-5 2 5 8*/
+5 2 5 8
+
+
+IDEA: push all the islands at the edges into a min heap, then do bfs on each of them*/
 
 struct Point{
 	int x,y, val;

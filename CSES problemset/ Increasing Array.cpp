@@ -1,4 +1,5 @@
-/*You are given an array of n integers. You want to modify the array so that it is increasing, i.e., every element is at least as large as the previous element.
+/*You are given an array of n integers. You want to modify the array so that it is increasing,
+i.e., every element is at least as large as the previous element.
 
 On each turn, you may increase the value of any element by one. What is the minimum number of turns required?
 
@@ -30,12 +31,12 @@ using namespace std;
 typedef long long ll;
 
 int main() {
-	int n; cin >> n;
-	ll x, mx = 0, ans = 0;
-	for (int i = 0; i < n; ++i) {
-		cin >> x;
-		mx = max(mx, x);
-		ans += mx - x;
-	}
-	cout << ans << "\n";
+    int n; cin >> n;
+    ll x, mx = 0, ans = 0;
+    for (int i = 0; i < n; ++i) {
+        cin >> x;
+        mx = max(mx, x);
+        ans += mx - x;
+    }
+    cout << ans << "\n";
 }

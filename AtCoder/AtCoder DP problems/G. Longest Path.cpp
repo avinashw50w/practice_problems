@@ -1,3 +1,7 @@
+/*FInd the longest path in a DAG
+IDEA: do a dfs on a node only if its indegree is 0
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -10,7 +14,7 @@ bool vis[maxn];
 void dfs(int u) {
     vis[u] = true;
 
-    for (int v: G[u]) {
+    for (int v : G[u]) {
         dist[v] = max(dist[v], dist[u] + 1);
         --indegree[v];
         if (indegree[v] == 0)

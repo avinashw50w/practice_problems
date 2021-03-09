@@ -14,9 +14,9 @@ The number of given pairs will be in the range [1, 1000].*/
 class Solution {
 public:
     int findLongestChain(vector<vector<int>>& pairs) {
-        sort(pairs.begin(), pairs.end(), 
-             [](vector<int> &a, vector<int> &b) { return a[0] < b[0]; });
-        
+        sort(pairs.begin(), pairs.end(),
+        [](auto & a, auto & b) { return a[0] < b[0]; });
+
         int n = pairs.size();
         vector<int> dp(n, 1);
         for (int i = 1; i < n; ++i) {
@@ -26,8 +26,8 @@ public:
                 }
             }
         }
-        
-        return dp[n-1];
+
+        return dp[n - 1];
     }
 };
 
@@ -37,16 +37,17 @@ class Solution {
     const int INF = 1e9;
 public:
     int findLongestChain(vector<vector<int>>& pairs) {
-        sort(pairs.begin(), pairs.end(), 
-             [](vector<int> &a, vector<int> &b) { return a[1] < b[1]; });
-        
+        // for getting the longest chain, sort according to the end of the chain
+        sort(pairs.begin(), pairs.end(),
+        [](auto & a, auto & b) { return a[1] < b[1]; });
+
         int n = pairs.size(), ans = 0, curr = -INF;
-        
-        for (auto p: pairs) if (curr < p[0]) {
-            curr = p[1]; 
-            ans++;
-        }
-        
+
+        for (auto p : pairs) if (curr < p[0]) {
+                curr = p[1];
+                ans++;
+            }
+
         return ans;
     }
 };

@@ -3,71 +3,44 @@ using namespace std;
 
 const int INF = 1e9 + 5;
 
-struct Node {
-    int val;
-    int x, y;
-
-    Node (int _val, int _x, int _y) {
-        val = _val;
-        x = _x;
-        y = _y;
-    }
-};
-
-void max_self(Node &a, Node b) {
-    if (a.val < b.val) {
-        a = b;
-    }
-}
-
-int is_first_row_col(Node node) {
-    return (node.x == 0 || node.y == 0);
-}
+int dp[n + 1][m + 1];
+pair<int, int> p[n + 1][m + 1];
 
 int main() {
 
     string s, t;
     cin >> s >> t;
 
+    s = ' ' + s;
+    t = ' ' + t;
+
     int n = s.length(), m = t.length();
 
-    vector<vector<Node>> dp(n+1, vector<Node>(m+1, Node(-INF,0,0)));
-
-    dp[0][0].val = 0;
-
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            if (s[i] == t[j])  {
-                max_self(dp[i+1][j+1], Node(1+dp[i][j].val, i, j));
+    for (int i = 1; i < n; ++i) {
+        for (int j = 1; j < m; ++j) {
+            dp[i][j] = dp[i - 1][j];
+            p[i][j] = { i - 1, j };
+            if (dp[i][j] < dp[i][j - 1]) {
+                dp[i][j] = dp[i][j - 1];
+                p[i][j] = { i, j - 1 };
             }
-
-            max_self(dp[i+1][j], Node(dp[i][j].val, i, j));
-            max_self(dp[i][j+1], Node(dp[i][j].val, i, j));
-        }
-    }
-
-    Node node(0,0,0);
-
-    for (int i = 0; i <= n; ++i) {
-        for (int j = 0; j <= m; ++j) {
-            max_self(node, Node(dp[i][j].val, i, j));
+            if (s[i] == t[j] and dp[i][j] < 1 + dp[i - 1][j - 1]) {
+                dp[i][j] = 1 + dp[i - 1][j - 1];
+                p[i][j] = { i - 1, j - 1 };
+            }
         }
     }
 
     string ans = "";
+    int i = n - 1, j = m - 1;
 
-    while (!is_first_row_col(node)) {
-        int i = node.x;
-        int j = node.y;
-        Node prev = dp[i][j];
-        
-        if (prev.x == i-1 and prev.y == j-1) ans += s[i-1];
-
-        node = prev;
+    while (i and j) {
+        if (p[i][j].first == i - 1 and p[i][j].second == j - 1)
+            ans += s[i];
+        i = p[i][j].first;
+        j = p[i][j].second;
     }
 
     reverse(ans.begin(), ans.end());
-
-    cout << ans << endl;
-
+    cout << ans << "\n";
 }

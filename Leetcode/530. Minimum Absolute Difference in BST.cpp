@@ -15,11 +15,29 @@ Output:
 
 Explanation:
 The minimum absolute difference is 1, which is the difference between 2 and 1 (or between 2 and 3).
-
-
 Note:
+There are at least two nodes in this BST.
+IDEA: while doing inorder traversal, keep track of the previous node value, and keep updating
+the ans.
+*/
 
-There are at least two nodes in this BST.*/
+class Solution {
+    void solve(TreeNode *root, int &prev, int &ans) {
+        if (!root) return;
+        solve(root->left, prev, ans);
+        ans = min(ans, root->val - prev);
+        prev = root->val;
+        solve(root->right, prev, ans);
+    }
+public:
+    int getMinimumDifference(TreeNode* root) {
+        int ans = 1e9, prev = -1e9;
+        solve(root, prev, ans);
+        return ans;
+    }
+};
+///////////////////////////////////////////
+// usign extra array to store the inorder nodes
 
 class Solution {
 public:
@@ -31,8 +49,9 @@ public:
     }
 
     int getMinimumDifference(TreeNode* root) {
-        vector<int> a;
-        solve(root, a);
+        int prev = INT_MIN;
+        int ans
+        solve(root, );
         int ans = INT_MAX;
         for (int i = 1; i < a.size(); ++i) ans = min(ans, a[i] - a[i - 1]);
         return ans;
