@@ -43,12 +43,12 @@ int main() {
 			ok &= s[i][p[i]] == '.';
 
 		// check if they don't lie diagonaly
-		memset(b, b + 8, 0);
+		memset(b, b + 15, 0);
 		for (int i = 0; i < 8; ++i)
 			if (b[i + p[i]]) ok = 0;
 			else b[i + p[i]] = 1;
 
-		memset(b, b + 8, 0);
+		memset(b, b + 15, 0);
 		for (int i = 0; i < 8; ++i)
 			if (b[i + 7 - p[i]]) ok = 0;
 			else b[i + 7 - p[i]] = 1;

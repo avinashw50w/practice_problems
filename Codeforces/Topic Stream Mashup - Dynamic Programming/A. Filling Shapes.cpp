@@ -1,6 +1,7 @@
-/*link: https://codeforces.com/gym/302977 */
+/*
+link: https://codeforces.com/gym/302977
 
-/*You have a given integer 𝑛. Find the number of ways to fill all 3×𝑛 tiles with the shape 
+You have a given integer 𝑛. Find the number of ways to fill all 3×𝑛 tiles with the shape 
 described in the picture below. Upon filling, no empty spaces are allowed. Shapes cannot overlap.
 ___
    |    it's like an L shape
