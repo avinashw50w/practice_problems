@@ -78,44 +78,44 @@ int main()
 	return 0;
 }
 
-/*The array [N,N−1,N−2,…,1][N,N−1,N−2,…,1] has exactly NN LISes. (But you can't simply use this because K≫NK≫N.)
-Given two arrays AA and BB that have XX and YY LISes respectively, you can form an array with X⋅YX⋅Y LISes by adding |A||A| to each element of BB and appending them.
-Given two arrays AA and BB that have XX and YY LISes respectively, you can form an array with X+YX+Y LISes by adding |B||B| to each element of AA and appending them. This only works if the LIS length is the same in AA and BB. If not, you can always increase the LIS length without changing the LIS count of any array AA by appending |A|+1|A|+1 at the end.
+/*The array [N,N−1,N−2,…,1][N,N−1,N−2,…,1] has exactly N LISes. (But you can't simply use this because K≫NK≫N.)
+Given two arrays A and B that have X and Y LISes respectively, you can form an array with X⋅YX⋅Y LISes by adding |A| to each element of B and appending them.
+Given two arrays A and B that have X and Y LISes respectively, you can form an array with X+YX+Y LISes by adding |B| to each element of A and appending them. This only works if the LIS length is the same in A and B. If not, you can always increase the LIS length without changing the LIS count of any array A by appending |A|+1 at the end.
 
 Using these, simply express KK in ternary:
 K=a0+3⋅(a1+3⋅(a2+3⋅(a3+…)))
 K=a0+3⋅(a1+3⋅(a2+3⋅(a3+…)))
-And then apply the principles above to construct a short array with exactly KK LISes. For K≤105K≤105, you'll need a length of at most N=94N=94.
+And then apply the principles above to construct a short array with exactly KK LISes. For K≤105K≤105, you'll need a length of at most N=94.
 
 EXPLANATION:
 Like many construction-based problems, this one admits many solutions. This editorial will focus on the author's solution. Feel free to describe yours!
 
 We'll use the following notation and terms to simplify things:
 
-For an array AA, let |A||A| be its length.
-For an array AA, let ALISALIS be the length of the longest increasing subsequence in AA. We'll also call it the LIS length of AA.
-For an array AA, let A#A# be the number of longest increasing subsequences in AA. We'll also call it the LIS count of AA.
+For an array A, let |A| be its length.
+For an array A, let ALIS be the length of the longest increasing subsequence in A. We'll also call it the LIS length of A.
+For an array A, let A#A# be the number of longest increasing subsequences in A. We'll also call it the LIS count of A.
 Setter's solution
-For small KK, a simple solution exists: [N,N−1,N−2,…,3,2,1][N,N−1,N−2,…,3,2,1]. This array has a LIS length of 11 and a LIS count of NN. So if we choose N:=KN:=K, then we have an answer! Unfortunately, due to problem restrictions, this will only work for K≤100K≤100.
+For small KK, a simple solution exists: [N,N−1,N−2,…,3,2,1]. This array has a LIS length of 1 and a LIS count of N. So if we choose N:=K, then we have an answer! Unfortunately, due to problem restrictions, this will only work for K≤100K≤100.
 
-In the other extreme, the array [1,2,3,…,N−2,N−1,N][1,2,3,…,N−2,N−1,N] has a LIS length of NN and a LIS count of 11, though this also doesn't help much.
+In the other extreme, the array [1,2,3,…,N−2,N−1,N] has a LIS length of N and a LIS count of 1, though this also doesn't help much.
 
 LIS-product of arrays
-An interesting thing happens in the array [3,2,1,7,6,5,4][3,2,1,7,6,5,4]. The LIS length of this array is 22. What is its LIS count? There are 33 ways to select the first number ([3,2,1][3,2,1]) and 44 ways to select the second number ([7,6,5,4][7,6,5,4]), so there are 3⋅4=123⋅4=12 ways to form an increasing subsequence of length 22, so the LIS count is 1212.
+An interesting thing happens in the array [3,2,1,7,6,5,4]. The LIS length of this array is 2. What is its LIS count? There are 3 ways to select the first number ([3,2,1]) and 4 ways to select the second number ([7,6,5,4]), so there are 3⋅4=12 ways to form an increasing subsequence of length 2, so the LIS count is 12.
 
-Notice that we just constructed an array whose LIS count is greater than its length! More generally, [X,X−1,…,2,1,X+Y,X+Y−1,…,X+2,X+1][X,X−1,…,2,1,X+Y,X+Y−1,…,X+2,X+1] has length X+YX+Y but a LIS count of X⋅YX⋅Y. And for XX and YY greater than one, X⋅YX⋅Y is always ≥X+Y≥X+Y. This lets us answer more KKs beyond 100100!
+Notice that we just constructed an array whose LIS count is greater than its length! More generally, [X,X−1,…,2,1,X+Y,X+Y−1,…,X+2,X+1] has length X+Y but a LIS count of X⋅Y. And for X and Y greater than one, X⋅Y is always ≥X+Y. This lets us answer more Ks beyond 100!
 
 Unfortunately, this solution is only good for K≤50⋅50K≤50⋅50 (the largest product you can get), and even then, there are some KKs which are still unachievable, in particular, prime KKs.
 
-We can extend the above observation even more: Let AA and BB be two arrays with lengths mm and nn, respectively. Consider the following array: [A1,A2,…,Am−1,Am,m+B1,m+B2,…,m+Bn−1,m+Bn][A1,A2,…,Am−1,Am,m+B1,m+B2,…,m+Bn−1,m+Bn]. Notice that in this array, the last nn elements are larger than the first mm elements! Thus, to form a longest increasing subsequence, we can construct the longest increasing subsequences in the first mm and last nn individually, and then combine them. Thus, this array has the following properties:
+We can extend the above observation even more: Let A and B be two arrays with lengths mm and N, respectively. Consider the following array: [A1,A2,…,Am−1,Am,m+B1,m+B2,…,m+Bn−1,m+Bn][A1,A2,…,Am−1,Am,m+B1,m+B2,…,m+Bn−1,m+Bn]. Notice that in this array, the last N elements are larger than the first mm elements! Thus, to form a longest increasing subsequence, we can construct the longest increasing subsequences in the first mm and last N individually, and then combine them. Thus, this array has the following properties:
 
 It has length m+nm+n
-Its LIS length is the sum of the LIS lengths of AA and BB; in other words, ALIS+BLISALIS+BLIS.
-Its LIS count is the product of the LIS counts of AA and BB; in other words, A#⋅B#A#⋅B#.
+Its LIS length is the sum of the LIS lengths of A and B; in other words, ALIS+BLISALIS+BLIS.
+Its LIS count is the product of the LIS counts of A and B; in other words, A#⋅B#A#⋅B#.
 This is pretty useful because it allows us to chain multiplications together! For example, we can form an array for every KK that's a power of 22, e.g. for K=211K=211 by performing the operation above repeatedly for [2,1][2,1]:
 [2,1,4,3,6,5,8,7,10,9,12,11,14,13,16,15,18,17,20,19,22,21]
 [2,1,4,3,6,5,8,7,10,9,12,11,14,13,16,15,18,17,20,19,22,21]
-Let's call the array [A1,…,Am,m+B1,…,m+Bn][A1,…,Am,m+B1,…,m+Bn] the LIS-product of AA and BB, and denote it as A⋅′BA⋅′B. It has the following properties:
+Let's call the array [A1,…,Am,m+B1,…,m+Bn][A1,…,Am,m+B1,…,m+Bn] the LIS-product of A and B, and denote it as A⋅′BA⋅′B. It has the following properties:
 
 |A⋅′B|=|A|+|B||A⋅′B|=|A|+|B|
 (A⋅′B)LIS=ALIS+BLIS(A⋅′B)LIS=ALIS+BLIS
@@ -125,14 +125,14 @@ The LIS-product allows us to construct answers for some KK beyond 50⋅5050⋅50
 Unfortunately, this still doesn't help us answer some KKs, in particular those where KK is prime or has a large prime factor. So far we can only construct LIS counts that can be expressed as products of other LIS counts. It would be nice if we can construct LIS counts that can be expressed as sums of other LIS counts.
 
 LIS-sum of arrays
-Fortunately, there is a way! Given two arrays AA and BB with lengths mm and nn, respectively, consider the array [n+A1,n+A2,…,n+Am−1,n+Am,B1,B2,…,Bn−1,Bn][n+A1,n+A2,…,n+Am−1,n+Am,B1,B2,…,Bn−1,Bn]. This time, the first mm elements are larger than the last nn elements. Thus, we can't form an increasing sequence that contain elements from both parts. It means that the LIS length of this array is max(ALIS,BLIS)max(ALIS,BLIS). But what's the LIS count? An interesting thing happens:
+Fortunately, there is a way! Given two arrays A and B with lengths mm and N, respectively, consider the array [n+A1,n+A2,…,n+Am−1,n+Am,B1,B2,…,Bn−1,Bn][n+A1,n+A2,…,n+Am−1,n+Am,B1,B2,…,Bn−1,Bn]. This time, the first mm elements are larger than the last N elements. Thus, we can't form an increasing sequence that contain elements from both parts. It means that the LIS length of this array is max(ALIS,BLIS)max(ALIS,BLIS). But what's the LIS count? An interesting thing happens:
 
 If ALIS<BLISALIS<BLIS, then the LIS count is B#B# because all increasing subsequences in the first mm elements have lengths ≤ALIS<BLIS≤ALIS<BLIS.
 If ALIS>BLISALIS>BLIS, then similarly the LIS count is A#A#.
 If ALIS=BLISALIS=BLIS, then the LIS count is A#+B#A#+B#, because all LISes in both parts have the same length.
-The last part is crucial: Notice that we can now form LIS counts that are sums of other LIS counts! But with one restriction though: we can only do that if the LIS lengths are equal. But thankfully, there's a way to make the LIS lengths equal, at the cost of increasing the lengths by a bit. For an array AA, consider the LIS product A⋅′[1]A⋅′[1]. The array [1][1] has LIS length of 11 and LIS count of 11, so according to the properties of LIS product, A⋅′[1]A⋅′[1] has a LIS length of ALIS+1ALIS+1 and a LIS count of A#⋅1=A#A#⋅1=A#. Notice that we increased the LIS length without increasing the LIS count! Similarly, A⋅′[1,2,…,n]A⋅′[1,2,…,n] increases the LIS length by nn while retaining the LIS count. Thus, if ALIS≠BLISALIS≠BLIS, we can make them equal using this property!
+The last part is crucial: Notice that we can now form LIS counts that are sums of other LIS counts! But with one restriction though: we can only do that if the LIS lengths are equal. But thankfully, there's a way to make the LIS lengths equal, at the cost of increasing the lengths by a bit. For an array A, consider the LIS product A⋅′[1]A⋅′[1]. The array [1][1] has LIS length of 11 and LIS count of 11, so according to the properties of LIS product, A⋅′[1]A⋅′[1] has a LIS length of ALIS+1ALIS+1 and a LIS count of A#⋅1=A#A#⋅1=A#. Notice that we increased the LIS length without increasing the LIS count! Similarly, A⋅′[1,2,…,n]A⋅′[1,2,…,n] increases the LIS length by N while retaining the LIS count. Thus, if ALIS≠BLISALIS≠BLIS, we can make them equal using this property!
 
-Thus, for any arrays AA and BB such that ALIS=BLISALIS=BLIS we can call the array [n+A1,…,n+Am,B1,…,Bn][n+A1,…,n+Am,B1,…,Bn] the LIS-sum of AA and BB, and denote it as A+′BA+′B. It has the following properties:
+Thus, for any arrays A and B such that ALIS=BLISALIS=BLIS we can call the array [n+A1,…,n+Am,B1,…,Bn][n+A1,…,n+Am,B1,…,Bn] the LIS-sum of A and B, and denote it as A+′BA+′B. It has the following properties:
 
 |A+′B|=|A|+|B||A+′B|=|A|+|B|
 (A+′B)LIS=ALIS=BLIS(A+′B)LIS=ALIS=BLIS
@@ -172,7 +172,7 @@ As an example, consider K=80K=80. The ternary form of this is 2+2⋅3+2⋅32+2�
 
 Using this technique, we are now able to reduce the required length to at most 9494, and we've now solved the problem!
 
-Here's a solution that uses 48 numbers in the worst case: say n=2a0+2a1+⋯+2ann=2a0+2a1+⋯+2an where a1<a2<...<ana1<a2<...<an. For the time b
+Here's a solution that uses 48 numbers in the worst case: say n=2a0+2a1+⋯+2aN=2a0+2a1+⋯+2an where a1<a2<...<ana1<a2<...<an. For the time b
 eing let's assume that we are allowed to put non-integer numbers in the list (we can "uncompress" them later). Start with the list 
 {2,1,4,3,⋯,2an,2an−1}{2,1,4,3,⋯,2an,2an−1} (basically anan blocks, where the i'th block consists of {i+1,i}{i+1,i}). There are 2an2an LIS's 
 in it with length anan. We now want to add 2an−12an−1 more LIS's. To do this, add any an−an−1an−an−1 distinct real numbers in the range 

@@ -1,4 +1,5 @@
-/*You are given a series of video clips from a sporting event that lasted T seconds.  These video clips can be overlapping with each other and have varied lengths.
+/*You are given a series of video clips from a sporting event that lasted T seconds.  These 
+video clips can be overlapping with each other and have varied lengths.
 
 Each video clip clips[i] is an interval: it starts at time clips[i][0] and ends at time clips[i][1].  We can cut these clips into segments freely: for example, a clip [0, 7] can be cut into segments [0, 1] + [1, 3] + [3, 7].
 
@@ -18,13 +19,21 @@ Constraints:
 
 1 <= clips.length <= 100
 0 <= clips[i][0] <= clips[i][1] <= 100
-0 <= T <= 100*/
+0 <= T <= 100
+
+    ------------
+        -----
+       ----------------
+*/
 
 class Solution {
     const int INF = 1e9;
 public:
 
     // using dp
+    // dp[i] - minimum cuts needed for clips upto time i
+    // [a...b] [b...c], if we know the answer upto T = b then dp[i] = min(dp[i], 1 + dp[b])
+    // where b <= i <= c
     int videoStitching(vector<vector<int>>& clips, int T) {
         int n = clips.size();
         sort(clips.begin(), clips.end());
@@ -46,6 +55,7 @@ public:
     // usign greedy
     int videoStitching(vector<vector<int>>& clips, int T) {
         int n = clips.size();
+        // since we need the process minimum no of clips, so sort by start time.
         sort(clips.begin(), clips.end());
         int ans = 0;
         int end = 0;
@@ -54,6 +64,8 @@ public:
         while (end < T) {
             ans++;
             int curr = end;
+            // find the clip whose start time is <= the current end and its end time is the 
+            // largest
             while (i < n and clips[i][0] <= curr) {
                 end = max(end, clips[i][1]);
                 i++;

@@ -6,8 +6,6 @@ A word chain is a sequence of words [word_1, word_2, ..., word_k] with k >= 1, w
 
 Return the longest possible length of a word chain with words chosen from the given list of words.
 
- 
-
 Example 1:
 
 Input: ["a","b","ba","bca","bda","bdca"]
@@ -35,8 +33,8 @@ public:
 
     int longestStrChain(vector<string>& words) {
         int n = words.size();
-        vector<int> dp(n, 1);
         sort(words.begin(), words.end(), [](string a, string b) { return a.size() < b.size(); });
+        vector<int> dp(n, 1);
         int ans = 1;
         for (int i = 1; i < n; ++i) {
             for (int j = 0; j < i; ++j) {

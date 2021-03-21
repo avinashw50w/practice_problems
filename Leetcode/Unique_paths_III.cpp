@@ -96,6 +96,7 @@ class Solution {
 
         for (int i = 0; i < R; ++i) {
             for (int j = 0; j < C: ++j) {
+                // both cell 0 and cell 2 are included in the mask
                 if (grid[i][j] & 1 == 0) mask |= code(i, j);
                 else if (grid[i][j] == 2) dr = i, dc = j;
                 else if (grid[i][j] == 1) sr = i, sc = j;
@@ -124,7 +125,7 @@ class Solution {
             }
         }
 
-        return ans = dp[x][y][mask];
+        return dp[x][y][mask] = ans;
     }
 
 }

@@ -35,7 +35,7 @@ int main() {
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
     }
-
+    // finding the previous lesser element
     vector<int> res(n);
     stack<int> st;
     for (int i = n - 1; i >= 0; --i) {
@@ -47,4 +47,21 @@ int main() {
     }
 
     for (int e : res) cout << e << " ";
+}
+
+/////////////////////////////////////
+// another simple solution without stack
+int n, a[maxn], nl[maxn];
+
+int main() {
+    cin >> n;
+
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+        nl[i] = i-1;
+        // while nl[i] != -1 and a[nl[i]] >= a[i]
+        while (~nl[i] and a[nl[i]] >= a[i])
+            nl[i] = nl[nl[i]];
+        cout << nl[i] + 1 << " ";
+    }    
 }

@@ -1,8 +1,8 @@
 /*Given an array A of integers, return the length of the longest arithmetic subsequence in A.
 
-Recall that a subsequence of A is a list A[i_1], A[i_2], ..., A[i_k] with 0 <= i_1 < i_2 < ... < i_k <= A.length - 1, and that a sequence B is arithmetic if B[i+1] - B[i] are all the same value (for 0 <= i < B.length - 1).
-
- 
+Recall that a subsequence of A is a list A[i_1], A[i_2], ..., A[i_k] 
+with 0 <= i_1 < i_2 < ... < i_k <= A.length - 1, and that a sequence B is arithmetic if 
+B[i+1] - B[i] are all the same value (for 0 <= i < B.length - 1).
 
 Example 1:
 
@@ -23,6 +23,10 @@ public:
     int longestArithSeqLength(vector<int>& A) {
         int n = A.size();
         if (n <= 1) return n;
+        // dp[i][d] - the length of the longest arithmetic subsequence with difference d
+        // which ends at a[i]
+        // suppose the subsequence ends with a[j] a[i], which has common difference d
+        // the dp[i][d] = max(dp[i][d], 1 + dp[j][d])
         map<int,int> dp[n];
         int ans = 2;
         
@@ -38,8 +42,7 @@ public:
                     len = dp[j][d] + 1;
                 }
                 
-                int curr = dp[i].count(d) ? dp[i][d] : 0;
-                dp[i][d] = max(curr, len);
+                dp[i][d] = max(dp[i][d], len);
                 
                 ans = max(ans, dp[i][d]);
             }

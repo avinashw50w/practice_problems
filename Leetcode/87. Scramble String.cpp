@@ -34,23 +34,18 @@ public:
         
         if (dp.count(s1 + "#" + s2)) return dp[s1 + "#" + s2];
         
-        bool flag = false;
+        bool res = false;
         int n = s1.size();
         
         for (int i = 1; i < n; ++i) {
-            if (isScramble(s1.substr(0, i), s2.substr(0, i)) 
-                and isScramble(s1.substr(i), s2.substr(i))) {
-                flag = true;
-                break;
-            }
-            if (isScramble(s1.substr(0, i), s2.substr(n-i, i)) 
-                and isScramble(s1.substr(i), s2.substr(0, n-i))) {
-                flag = true;
-                break;
-            }
+            res = (isScramble(s1.substr(0, i), s2.substr(0, i)) 
+                and isScramble(s1.substr(i), s2.substr(i))) 
+                                    or
+                (isScramble(s1.substr(0, i), s2.substr(n-i, i)) 
+                and isScramble(s1.substr(i), s2.substr(0, n-i)));
         }
         
-        dp[s1 + "#" + s2] = flag;
-        return flag;
+        dp[s1 + "#" + s2] = res;
+        return res;
     }
 };

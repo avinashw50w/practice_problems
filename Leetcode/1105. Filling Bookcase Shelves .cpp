@@ -20,13 +20,38 @@ Notice that book number 2 does not have to be on the first shelf.
 |    ||    |
          | |
 |4||5||6||7|*/
+/*IDEA: let dp[i] = minimum height after taking i books from start
+let the partition be [0..i-1][i..]
+if we partition at any point j from [i..n] then dp[j] = min(dp[j], dp[i-1] + h)
+where h is the minimum height of books from i to j
+*/
+class Solution {
+public:
+    int minHeightShelves(vector<vector<int>>& books, int shelf_width) {
+        int n = books.size();
+        vector<int> dp(n + 1, INT_MAX);
+        dp[0] = 0;
+        for (int i = 0; i < n; ++i) {
+            int w = 0, h = 0;
+            for (int j = i; j < n; ++j) {
+                w += books[j][0];
+                if (w > shelf_width) break;
+                h = max(h, books[j][1]);
+                dp[j+1] = min(dp[j+1], dp[i] + h);
+            }
+        }
+        return dp[n];
+    }
+};
+
+//////////////////////////////////////////////////////////////////
 
 class Solution {
     const int INF = 1e9;
 public:
     int minHeightShelves(vector<vector<int>>& books, int shelf_width) {
         int n = books.size();
-        // dp[i] = min height after using books upto index i
+        // dp[i] = min height after using i books
         vector<int> dp(n+1, 0);
         
         dp[0] = 0;

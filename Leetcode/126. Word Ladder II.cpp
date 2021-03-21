@@ -12,10 +12,11 @@ Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","
 Output: [["hit","hot","dot","dog","cog"],["hit","hot","lot","log","cog"]]*/
 
 class Solution {
+    unordered_map<string, unordered_set<string>> adj;
     vector<vector<string>> ans;
 public:
     // NOTE : taking adj as not &adj gave TLE, so always take & 
-    void dfs(string src, string dest, vector<string> path, unordered_map<string, unordered_set<string>> &adj) {
+    void dfs(string src, string dest, vector<string> path) {
         path.push_back(src);
         
         if (src == dest) {
@@ -33,7 +34,6 @@ public:
     
     vector<vector<string>> findLadders(string src, string dest, vector<string>& wordList) {
         unordered_set<string> words(wordList.begin(), wordList.end());
-        unordered_map<string, unordered_set<string>> adj;
         queue<string> q;
         unordered_map<string, int> dist;
         
@@ -43,8 +43,8 @@ public:
         while (q.size()) {
             string top = q.front(); q.pop();
             string t = top;
-            
-            for (int i = 0; i < top.length(); ++i) {
+            // change a char in t and check if it exists in the dictionary
+            for (int i = 0; i < t.length(); ++i) {
                 for (char c = 'a'; c <= 'z'; ++c) {
                     // change 1 character in t
                     if (t[i] == c) continue;
@@ -69,7 +69,7 @@ public:
         
         vector<string> path;
         
-        dfs(src, dest, path, adj);
+        dfs(src, dest, path);
         
         return ans;
     }

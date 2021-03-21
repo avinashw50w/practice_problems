@@ -6,8 +6,6 @@ Only one letter is different between each adjacent pair of words in the sequence
 Every word in the sequence is in wordList.
 Given two words, beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence from beginWord to endWord, or 0 if no such sequence exists.
 
- 
-
 Example 1:
 
 Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
@@ -28,28 +26,29 @@ public:
         return cnt == 1;
     }
     
-    int bfs(vector<string> words, int st, string end) {
-        queue<array<int, 2>> q;
-        q.push({st, 1});
-        vector<bool> vis(maxn + 1);
-        
-        while (q.size()) {
-            int u = q.front()[0];
-            int t = q.front()[1];
-            q.pop();
-            vis[u] = true;
+    int bfs(vector<string> words, int src, string dest) {
+        queue<int> q;
+        q.push(src);
+        vector<int> dist(words.size(), -1);
+        dist[src] = 0;
 
-            if (words[u] == end) return t;
+        while (q.size()) {
+            int u = q.front();
+            q.pop();
+
+            if (words[u] == dest) return dist[u];
             
             for(int v: g[u]) {
-                if (!vis[v]) {
-                    q.push({ v, t + 1 });
+                if (dist[v] == -1) {
+                    dist[v] = dist[u] + 1;
+                    q.push(v);
                 }
             }
         }
         return 0;
     }
-    
+    // T: O(N^2) where N is the # of words
+    // S: O(N)
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
         vector<string> words;
         words.push_back(beginWord);
@@ -68,3 +67,37 @@ public:
         return bfs(words, 0, endWord);
     }
 };
+
+////////////////////////////////////////////////////////////////
+// another approach
+// T: O(n*w*26) where n is the #of words in wordlist,
+// w is the maximum length of a word in wordlist
+int ladderLength(string src, string dest, vector<string>& wordList) {
+    unordered_set<string> st;
+    for (string s: wordList) st.insert(s);
+    queue<string> q;
+    unordered_map<string,int> dist;
+    q.push(src);
+    dist[src] = 0;
+
+    while (q.size()) {
+        string u = q.front();
+        q.pop();
+        string v = u;
+        for (int i = 0; i < v.length(); ++i) {
+            for (char c = 'a'; c <= 'z'; ++c) {
+                if (v[i] == c) continue;
+                v[i] = c;
+                if (st.count(v)) {
+                    if (dist.count(v) == 0) {
+                        dist[v] = dist[u] + 1;
+                        q.push(v);
+                    }
+                }
+                v[i] = u[i];
+            }
+        }
+    }
+
+    return dist[dest];
+}

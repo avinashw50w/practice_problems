@@ -1,4 +1,5 @@
-/*Given scores of N athletes, find their relative ranks and the people with the top three highest scores, who will be awarded medals: "Gold Medal", "Silver Medal" and "Bronze Medal".
+/*Given scores of N athletes, find their relative ranks and the people with the top three 
+highest scores, who will be awarded medals: "Gold Medal", "Silver Medal" and "Bronze Medal".
 
 Example 1:
 Input: [5, 4, 3, 2, 1]
@@ -14,11 +15,11 @@ public:
     vector<string> findRelativeRanks(vector<int>& a) {
         int n = a.size();
         vector<string> ans(n);
-        set<int> st;
-        for (int e : a) st.insert(e);
-
+        vector<int> b(a.begin(), a.end());
+        sort(b.begin(), b.end());
+    
         for (int i = 0; i < n; ++i) {
-            int idx = distance(st.begin(), st.lower_bound(a[i]));
+            int idx = lower_bound(b.begin(), b.end(), a[i]) - b.begin();
             if (idx == n - 1) ans[i] = "Gold Medal";
             else if (idx == n - 2) ans[i] = "Silver Medal";
             else if (idx == n - 3) ans[i] = "Bronze Medal";

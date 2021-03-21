@@ -50,8 +50,8 @@ public:
 
     int getMinimumDifference(TreeNode* root) {
         int prev = INT_MIN;
-        int ans
-        solve(root, );
+        vector<int> a;
+        solve(root, a);
         int ans = INT_MAX;
         for (int i = 1; i < a.size(); ++i) ans = min(ans, a[i] - a[i - 1]);
         return ans;

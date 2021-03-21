@@ -27,7 +27,6 @@ public:
 	}
 
 	bool hasPathSum(TreeNode* root, int sum) {
-		if (!root) return false;
 		return solve(root, sum, 0);
 	}
 };
