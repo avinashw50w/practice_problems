@@ -1,5 +1,5 @@
-/*You are given a series of video clips from a sporting event that lasted T seconds.  These 
-video clips can be overlapping with each other and have varied lengths.
+/*You are given a series of video clips from a sporting event that lasted T seconds.  
+These video clips can be overlapping with each other and have varied lengths.
 
 Each video clip clips[i] is an interval: it starts at time clips[i][0] and ends at time clips[i][1].  We can cut these clips into segments freely: for example, a clip [0, 7] can be cut into segments [0, 1] + [1, 3] + [3, 7].
 
@@ -63,15 +63,15 @@ public:
 
         while (end < T) {
             ans++;
-            int curr = end;
+            int currEnd = end;
             // find the clip whose start time is <= the current end and its end time is the 
             // largest
-            while (i < n and clips[i][0] <= curr) {
+            while (i < n and clips[i][0] <= currEnd) {
                 end = max(end, clips[i][1]);
                 i++;
             }
 
-            if (curr == end) return -1;
+            if (currEnd == end) return -1;
         }
 
         return ans;

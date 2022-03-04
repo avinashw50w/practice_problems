@@ -29,9 +29,9 @@ public:
         dp[0] = 0;
         for (int i = 0; i < n; ++i) {
             int mx = a[i];
+                // partition at i
             for (int j = i; j < n and j-i+1 <= k; ++j) {
                 mx = max(mx, a[j]);
-                // partition at j
                 dp[j+1] = max(dp[j+1], dp[i] + (j-i+1) * mx);
             }
         }

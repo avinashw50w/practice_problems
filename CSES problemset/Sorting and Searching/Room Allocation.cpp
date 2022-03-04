@@ -49,10 +49,11 @@ int main() {
 	}
 	// sort based on end time
 	sort(a, a + n);
+	// st will store the pair { end time, assigned room # }
 	set<array<int, 2>> st;
 
 	for (int i = 0; i < n; ++i) {
-		// find any previous non overlapping interval
+		// find any previous interval such that its end time >= curr start time
 		// NOTE a[i][1] is the start time here
 		auto it = st.lower_bound({a[i][1]});
 		if (it != st.begin()) {

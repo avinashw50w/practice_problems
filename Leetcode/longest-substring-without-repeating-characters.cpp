@@ -9,27 +9,15 @@ Explanation: The answer is "abc", with the length of 3. */
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        if (s.size() == 0) return 0;
-        int cnt = 1, mx = 1, prev;
-        int f[255] = {};
-        memset(f, -1, sizeof(f));
-        f[s[0]] = 0;
+        int ans = 0, n = s.length();
+        unordered_map<char, int> mp;
         
-        for (int i = 1; i < s.size(); ++i) {
-        
-            prev = f[s[i]];
-            
-            if (prev == -1 or i-cnt > prev) cnt++;
-            else {
-                mx = max(mx, cnt);
-                cnt = i-prev;
-            }
-            
-            f[s[i]] = i;
+        for (int start = 0, end = 0; start < n; ++start) {
+            while (end < n and mp[s[end]] == 0) mp[s[end++]]++;
+            ans = max(ans, end - start);
+            mp[s[start]]--;
         }
         
-        mx = max(mx, cnt);
-        
-        return mx;
+        return ans;
     }
 };

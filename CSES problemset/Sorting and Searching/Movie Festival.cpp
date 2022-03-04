@@ -1,4 +1,5 @@
-/*In a movie festival n movies will be shown. You know the starting and ending time of each movie. What is the maximum number of movies you can watch entirely?
+/*In a movie festival n movies will be shown. You know the starting and ending time of each 
+movie. What is the maximum number of movies you can watch entirely?
 
 Input
 
@@ -32,9 +33,9 @@ int main() {
 
 	sort(p, p + n, [](auto & a, auto & b) { return a.second < b.second; });
 
-	int ans = 1, l = p[0].second;
+	int ans = 1, last = p[0].second;
 	for (int i = 1; i < n; ++i) {
-		if (p[i].first >= l) ans++, l = p[i].second;
+		if (last <= p[i].first) ans++, last = p[i].second;
 	}
 	cout << ans << "\n";
 }

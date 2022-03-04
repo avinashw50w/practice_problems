@@ -1,4 +1,5 @@
-/*Given an array of n integers, your task is to find for each array position the nearest position to its left having a smaller value.
+/*Given an array of n integers, your task is to find for each array position the nearest 
+position to its left having a smaller value.
 
 Input
 
@@ -40,13 +41,13 @@ int main() {
     stack<int> st;
     for (int i = n - 1; i >= 0; --i) {
         while (!st.empty() and a[i] < a[st.top()]) {
-            res[st.top()] = i + 1;
+            res[st.top()] = i;
             st.pop();
         }
         st.push(i);
     }
 
-    for (int e : res) cout << e << " ";
+    for (int e : res) cout << e + 1 << " ";
 }
 
 /////////////////////////////////////

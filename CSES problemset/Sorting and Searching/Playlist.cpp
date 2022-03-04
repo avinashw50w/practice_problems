@@ -34,14 +34,16 @@ int main() {
 	for (int &x : a) cin >> x;
 	map<int, int> mp;
 	int ans = 0, cnt = 0;
-	for (int i = 0, j = 0; i < n; ++i) {
-		while (j < n and mp[a[j]] == 0) {
-			mp[a[j]]++;
-			j++;
+	
+	for (int start = 0, end = 0; start < n; ++start) {
+		while (end < n and mp[a[end]] == 0) {
+			mp[a[end]]++;
+			end++;
 		}
-
-		ans = max(ans, j - i);
-		--mp[a[i]];
+	
+		ans = max(ans, end - start);
+		mp[a[start]]--;
 	}
+	
 	cout << ans << "\n";
 }

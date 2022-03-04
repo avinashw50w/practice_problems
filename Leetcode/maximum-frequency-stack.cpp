@@ -38,8 +38,11 @@ The total number of FreqStack.pop calls will not exceed 10000 in a single test c
 The total number of FreqStack.push and FreqStack.pop calls will not exceed 150000 across all test cases.*/
 
 class FreqStack {
+    // stores the freq of of each of the element
     unordered_map<int,int> freqMap;
-    vector<stack<int>> bucket;
+    // bucker stores the mapping of the [ frequency count, the elements with that freq count]
+    vector<vector<int>> bucket;
+    // keeps track of the max frequency so far
     int maxFreq;
 public:
     FreqStack() {
@@ -52,15 +55,15 @@ public:
         
         if (freq > maxFreq) {
             maxFreq = freq;
-            bucket.push_back(stack<int>());
+            bucket.push_back(vector<int>());
         }
         
-        bucket[freq-1].push(x);
+        bucket[freq-1].push_back(x);
     }
     
     int pop() {
-        int x = bucket[maxFreq-1].top();
-        bucket[maxFreq-1].pop();
+        int x = bucket[maxFreq-1].back();
+        bucket[maxFreq-1].pop_back();
         
         if (bucket[maxFreq-1].empty()) {
             maxFreq--;
