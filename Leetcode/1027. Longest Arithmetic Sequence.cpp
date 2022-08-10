@@ -37,10 +37,7 @@ public:
                 
                 int d = x-y;
                 
-                int len = 2;
-                if (dp[j].count(d)) {
-                    len = dp[j][d] + 1;
-                }
+                int len = dp[j].count(d) ? dp[j][d] + 1 : 2;
                 
                 dp[i][d] = max(dp[i][d], len);
                 

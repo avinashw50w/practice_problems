@@ -19,7 +19,7 @@ void reverse(Node *head, int K) {
 	int cnt = 0;
 
 	while(curr != NULL and cnt < K) {
-
+		cnt++;
 		next = curr->next;
 		curr->next = prev;
 		prev = curr;

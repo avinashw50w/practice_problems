@@ -33,7 +33,7 @@ public:
 vector<int> twoSum(vector<int>& nums, int target) {
 	vector<int> res;
 	sort(nums.begin(), nums.end());
-	int n = r.size() - 1, l = 0, r = n-1;
+	int n = r.size(), l = 0, r = n-1;
 	while (l < r) {
 		int x = a[l] + a[r];
 		if (x == target) return {l, r};

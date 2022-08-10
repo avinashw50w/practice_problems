@@ -45,6 +45,7 @@ public:
             int s = clip[0];
             int e = clip[1];
             for (int i = s; i <= e; ++i) {
+                // make a cut at i
                 dp[i] = min(dp[i], 1 + dp[s]);
             }
         }

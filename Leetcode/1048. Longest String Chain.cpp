@@ -27,7 +27,7 @@ public:
         for (char c: a) f[c-'a']--;
         for (char c: b) f[c-'a']++;
         int cnt = 0;
-        for (int i: f) cnt += i != 0;
+        for (int i: f) cnt += i > 0;
         return cnt == 1;
     }
 
