@@ -18,7 +18,7 @@ string convert(string s, int numRows) {
 
     if (numRows == 1) return s;
 
-    vector<string> rows(min(numRows, s.size()));
+    vector<string> rows(min(numRows, (int)s.size()));
 
     int currRow = 0;
     bool goingDown = false;

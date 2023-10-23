@@ -19,7 +19,7 @@ Explanation: 342 + 465 = 807.
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode *res = NULL, *temp, *prev = NULL;
+        ListNode *res = NULL, *temp, *resEnd = NULL;
         int sum, carry = 0;
         
         while(l1 or l2) {
@@ -31,16 +31,16 @@ public:
             temp = new ListNode(sum);
             
             if (! res) res = temp;
-            else prev->next = temp;
+            else resEnd->next = temp;
             
-            prev = temp;
+            resEnd = temp;
             
             if (l1) l1 = l1->next;
             if (l2) l2 = l2->next;
         }
         
         if (carry)
-            prev->next = new ListNode(carry);
+            resEnd->next = new ListNode(carry);
         
         return res;
     }
