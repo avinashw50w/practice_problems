@@ -34,14 +34,9 @@ ll solve() {
         f[c] = 1;
     }
 
-    for (char &c: s) {
-        if (f.count(c)) c = '1';
-        else c = '0';
-    }
-
     int cnt = 0, ans = 0;
     for (int i = 0; i < n; ++i) {
-        if (s[i] == '1') cnt++, ans += cnt;
+        if (f.count(s[i])) cnt++, ans += cnt;
         else cnt = 0;
     }
 
