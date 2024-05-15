@@ -24,10 +24,11 @@ int solve(vector<int>& nums, int a, int b) {
     for (int i = a+b; i < n; ++i) {
         amax = max(amax, nums[i-b] - nums[i - (a+b)]);
         bmax = max(bmax, nums[i-a] - nums[i - (a+b)]);
-        res = max(res, max(
-            amax + nums[i] - nums[i-b],
-            bmax + nums[i] - nums[i-a]
-        ));
+        res = max({
+            res,
+            amax + nums[i] - nums[i-a],
+            bmax + nums[i] - nums[i-b]
+        });
     }
 
     return res;
